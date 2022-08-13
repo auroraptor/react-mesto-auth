@@ -1,0 +1,19 @@
+.like-button {
+  grid-area: ♥;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../images/__like_disabled.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-color: #FFFFFF;
+  align-self: center;
+  /* margin-right: 5px; */
+  cursor: pointer;
+}
+
+.like-button:hover {
+  opacity: .5;
+  transition: opacity .5s linear;
+}
+
+/* мне просто интересно, а как эту кнопку лайка правильно назвать чтобы было по бэм <3 */

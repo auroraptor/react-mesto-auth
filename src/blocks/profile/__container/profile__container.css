@@ -1,0 +1,18 @@
+.profile__container {
+  /*   min-height: 120px;
+Задавать высоту элементам допустимо в том случае, если нет других способов решить эту проблему (например, для фоновой подложки определенной высоты). Здесь в этом нет необходимости, высота элемента задается отступами и контентом внутри него */
+  /* min-height: 120px; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  position: relative;
+}
+
+@media screen and (max-width: 425px) {
+  .profile__container {
+   margin: 0 19px;
+   gap: 26px;
+  }
+}
+

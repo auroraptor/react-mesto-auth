@@ -1,0 +1,21 @@
+import React from "react";
+import '../index.css';
+
+function PopupWithForm(props) { // {de}
+
+  return (
+  <div className={`popup ${props.name}-popup ${props.isOpened && `popup_opened`}`} onClick={props.onClose}>
+      <div className="popup__container">
+        <button type="button" className="popup__close-icon" aria-label="Закрыть" onClick={props.onClose}></button>
+      <form className={`form ${props.name}-form popup__form`} name="profile-form" noValidate>
+          <div className="container">
+            <p className="heading">{props.title}</p>
+            <>{props.children}</>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+export default PopupWithForm;

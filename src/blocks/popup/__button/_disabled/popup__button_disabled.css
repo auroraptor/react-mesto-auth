@@ -1,0 +1,36 @@
+.popup__button_disabled {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
+  opacity: .2;
+}
+
+.popup__button {
+  width: 358px;
+  height: 50.15px;
+  background: #000000;
+  border-radius: 2px;
+  border: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-top: calc(48px - 33px);
+  cursor: pointer;
+}
+
+.popup__button:hover {
+  opacity: 0.8;
+  transition: opacity .5s linear;
+}
+
+@media (max-width: 1280px) {
+  .popup__button {
+    height: calc(46px + ((100vw - 320px) / (1280 - 320)) * (50.15 - 46));
+    width: calc(238px + ((100vw - 320px) / (1280 - 320)) * (358 - 238));
+    font-size: calc(14px + ((100vw - 320px) / (1280 - 320)) * (18 - 14));
+    line-height: calc(17px + ((100vw - 320px) / (1280 - 320)) * (22 - 17));
+    /* margin-top: calc(45px + ((100vw - 320px) / (1280 - 320)) * (15 - 45)); */
+  }
+}

@@ -1,0 +1,51 @@
+.profile__avatar {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  /* position: relative; */
+  align-self: center;
+  object-fit: cover;
+  /* спасибо дока <3 за то что ты есть */
+}
+
+.profile__avatar:hover::after {
+  opacity: 1;
+}
+
+.avatar {
+  /* background: #119466; */
+  /* width: 120px; */
+  /* height: 120px; */
+  position: relative;
+}
+
+.profile__another-container {
+  position: relative;
+}
+.profile__button {
+  background-image: url(../../../images/__edit-avatar.svg);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  position: absolute;
+  /* top: 47px;
+  left: 47px;
+  width: 26px;
+  height: 26px; */
+  top: 0px;
+  left: 0px;
+  width: 120px;
+  height: 120px;
+  padding: 0;
+  border: none;
+  background-color: rgba(0, 0, 0, .8);
+  opacity: 0;
+}
+
+.profile__button:hover {
+  cursor: pointer;
+  opacity: 1;
+  /* transform: scale(1.1); */
+  transition: all .5s linear;
+}
+
+

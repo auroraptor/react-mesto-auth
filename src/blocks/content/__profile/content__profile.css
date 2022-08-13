@@ -1,0 +1,10 @@
+.content__profile {
+  padding-top: 40px;
+  display: flex;
+}
+
+@media screen and (max-width: 1280px) {
+  .content__profile {
+    padding-top: calc(42px + ((100vw - 320px) / (1280 - 320)) * (40 - 42));
+  }
+}

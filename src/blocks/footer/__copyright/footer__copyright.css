@@ -1,0 +1,19 @@
+.footer__copyright {
+  min-width: 282px;
+  margin-top: 67px;
+  margin-bottom: 60px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #545454;
+}
+
+@media (max-width: 880px) {
+  .footer__copyright {
+    margin-top: calc(48px + ((100vw - 320px) / (880 - 320)) * (67 - 48));
+    margin-bottom: calc(36px + ((100vw - 320px) / (880 - 320)) * (60 - 36));
+    margin-left: 19px;
+    font-size: calc(14px + ((100vw - 320px) / (880 - 320)) * (18 - 14));
+    line-height: calc(17px + ((100vw - 320px) / (880 - 320)) * (22 - 17));
+  }
+}
