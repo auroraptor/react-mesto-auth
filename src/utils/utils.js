@@ -8,8 +8,6 @@ const logoColorBlackImage = new URL('../images/__logo_color_black.svg', import.m
 const logoColorWhiteImage = new URL('../images/__logo_color_white.svg', import.meta.url);
 const moveImage = new URL('../images/__move.svg', import.meta.url);
 
-// avatar вставлен с помощью тега img и обращается в атрибуте src к пути ./images/__avatar.jpg. Если запустить проект на локальном сервере, изображение не загрузится
-
 const images = [
   {name: 'add button', image: addButtonImage},
   {name: 'avatar', image: avatarImage},
@@ -21,25 +19,6 @@ const images = [
   {name: 'white logo', image: logoColorWhiteImage},
   {name: 'move', image: moveImage},
 ]
-
-// config для создания объекта валидации всех форм
-
-const configValid = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-const formValidators = {};
-
-const configUserInfo = {
-  avatar: '.profile__avatar',
-  name: '.name',
-  about: '.about',
-};
 
 const configPopupWithConfirm = {
   selector: '.confirm-popup',
@@ -75,12 +54,47 @@ const configPopupAddNewItem = {
   buttonLoadingTextContent: 'Сохранение...',
 }
 
-const page = document.querySelector('.page');
-const profile = page.querySelector('.profile'); // профиль
-const editAvatarButton = profile.querySelector('.profile__button');
-const editProfileButton = profile.querySelector('.profile__edit-button');
-const addButton = profile.querySelector('.add-button');
+const editProfileChildren = () => {
+  return (
+    <>
+      <input type="text" className="form__item form__item_input_name popup__input" name="name" placeholder="Имя" minLength="2" maxLength="40" required autoComplete="off" id="name" />
+      <span className="popup__error name-error"></span>
+      <input type="text" className="form__item form__item_input_about popup__input" name="about" placeholder="О себе" minLength="2" maxLength="200" required autoComplete="off" id="about" />
+      <span className="popup__error about-error"></span>
+      <button type="submit" className="form__submit-button edit-profile-form__button popup__button" value="disable" disabled>{configPopupEditProfile.buttonTextContent}</button>
+    </>
+  )
+}
 
-export { editAvatarButton, editProfileButton, addButton, configValid, configUserInfo, configPopupAddNewItem, configPopupWithConfirm, configPopupEditAvatar, configPopupEditProfile, profile, formValidators }
+const addNewPlaceChildren = () => {
+  return (
+    <>
+    <input type="text" className="form__item form__item_input_place popup__input" placeholder="Название" name="name" minLength="2" maxLength="30" autoComplete="off" id="place" required />
+          <span className="popup__error place-error">span</span>
+          <input type="url" className="form__item form__item_input_link popup__input" placeholder="Ссылка на картинку" name="link" autoComplete="off" id="link" required />
+          <span className="popup__error link-error">span</span>
+          <button type="submit" className="form__submit-button new-item-form__button popup__button" value="disable" disabled>{configPopupAddNewItem.buttonTextContent}</button>
+    </>
+  )
+}
+
+const editAvatarChildren = () => {
+  return (
+    <>
+      <input type="url" className="form__item form__item_input_avatar popup__input" placeholder="Ссылка на картинку" name="avatar" autoComplete="off" id="avatar" required />
+      <span className="popup__error avatar-error">span</span>
+      <button type="submit" className="form__submit-button popup__button" value="disable" disabled>{configPopupEditAvatar.buttonTextContent}</button>
+    </>
+  )
+}
+
+const confirmChildren = () => {
+  return (
+    <button type="button" className="popup__button" id="confirm">{configPopupWithConfirm.buttonTextContent}</button>
+  )
+}
+
+export { editProfileChildren, addNewPlaceChildren, editAvatarChildren, confirmChildren }
+
 
 

@@ -25,6 +25,7 @@ class Api {
     .then((res) => this._getResponseData(res));
   }
 
+
   postNewCard(data) {
     return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
