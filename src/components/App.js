@@ -34,16 +34,6 @@ function App() {
     setSelectedCard(null);
   }
 
-  React.useEffect(() => {
-    document.addEventListener('keydown', (evt) => {
-      evt.key === 'Escape' && closeAllPopups();
-    });
-
-    return () => {
-      document.removeEventListener('keydown', closeAllPopups);
-    }
-  });
-
   return (
     <div className="page"><div className="page__container">
 

@@ -3,6 +3,17 @@ import '../index.css';
 
 function PopupWithForm(props) {
 
+  // DRY
+  React.useEffect(() => {
+    document.addEventListener('keydown', (evt) => {
+      evt.key === 'Escape' && closeAllPopups();
+    });
+
+    return () => {
+      document.removeEventListener('keydown', closeAllPopups);
+    }
+  });
+
   return (
   <div className={`popup ${props.name}-popup ${props.isOpened && `popup_opened`}`}>
       <div className="popup__container">
