@@ -54,10 +54,10 @@ function App() {
     <Footer />
 
     <PopupWithForm name="edit-profile" title="Редактировать профиль" isOpened={isEditProfilePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
-      <>
-        <Input type="text" id="name" name="name" placeholder="Имя" minLength="2" maxLength="40"></Input>
-        <Input type="text" id="about" name="about" placeholder="О себе" minLength="2" maxLength="200"></Input>
-      </>
+    <>
+      <Input type="text" id="name" name="name" placeholder="Имя" minLength="2" maxLength="40"></Input>
+      <Input type="text" id="about" name="about" placeholder="О себе" minLength="2" maxLength="200"></Input>
+    </>
     </PopupWithForm>
 
     <PopupWithForm name="new-item" title="Новое место" isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
