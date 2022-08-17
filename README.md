@@ -2,7 +2,7 @@
 
 ## Обзор
 
-[aurolink](https://auroraptor.github.io/mesto-rea
+[aurolink](https://auroraptor.github.io/mesto-react/)
 
 ### Описание проекта
 
