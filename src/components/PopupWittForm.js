@@ -11,6 +11,7 @@ function PopupWithForm(props) {
           <div className="container">
             <label className="heading">{props.title}</label>
             <>{props.children}</>
+            <button type="submit" className="form__submit-button popup__button" value="disable" disabled>{props.buttonTextContent}</button>
           </div>
         </form>
       </div>

@@ -5,7 +5,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWittForm';
 import ImagePopup from './ImagePopup';
-import { editProfileChildren, addNewPlaceChildren, editAvatarChildren, confirmChildren } from '../utils/utils';
+import Input from './Input';
 
 function App() {
 
@@ -53,13 +53,26 @@ function App() {
 
     <Footer />
 
-    <PopupWithForm name="edit-profile" title="Редактировать профиль" children={editProfileChildren()} isOpened={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+    <PopupWithForm name="edit-profile" title="Редактировать профиль" isOpened={isEditProfilePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
+      <>
+        <Input type="text" id="name" name="name" placeholder="Имя" minLength="2" maxLength="40"></Input>
+        <Input type="text" id="about" name="about" placeholder="О себе" minLength="2" maxLength="200"></Input>
+      </>
+    </PopupWithForm>
 
-    <PopupWithForm name="new-item" title="Новое место" children={addNewPlaceChildren()} isOpened={isAddPlacePopupOpen} onClose={closeAllPopups}/>
+    <PopupWithForm name="new-item" title="Новое место" isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
+    <>
+      <Input type="text" id="place" name="name" placeholder="Название"  minLength="2" maxLength="30" />
+      <Input type="url" id="link" name="link" placeholder="Ссылка на картинку" />
+    </>
+    </PopupWithForm>
 
-    <PopupWithForm name="avatar" title="Обновить аватар" children={editAvatarChildren()} isOpened={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
+    <PopupWithForm name="avatar" title="Обновить аватар" isOpened={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
+      <Input type="url" id="avatar" name="avatar" placeholder="Ссылка на картинку" />
+    </PopupWithForm>
 
-    <PopupWithForm name="confirm" title="Вы уверены?" children={confirmChildren()} onClose={closeAllPopups} />
+    <PopupWithForm name="confirm" title="Вы уверены?" onClose={closeAllPopups} buttonTextContent="Да">
+    </PopupWithForm>
 
     <ImagePopup card={selectedCard} isOpened={handleCardClick} onClose={closeAllPopups}/>
 
