@@ -8,8 +8,8 @@ return (
       <div className="popup__yet-another-container">
       <button className="popup__close-icon popup__close-button"  onClick={onClose}></button>
       <figure className="popup__figure">
-        <img src={card && card.link} alt={card && `Изображение ${card.name}`} className="popup__image" />
-        <figcaption className="popup__caption">{card && card.name}</figcaption>
+        <img src={card?.link} alt={card && `Изображение ${card.name}`} className="popup__image" />
+        <figcaption className="popup__caption">{card?.name}</figcaption>
       </figure>
       </div>
     </div>
