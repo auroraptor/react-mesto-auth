@@ -1,19 +1,7 @@
 import React from "react";
 import '../index.css';
-import closeAllPopups from "./App.js"
 
 function PopupWithForm({ name, title, isOpened, onClose, children, buttonTextContent}) {
-
-  // DRY
-  React.useEffect(() => {
-    document.addEventListener('keydown', (evt) => {
-      evt.key === 'Escape' && closeAllPopups();
-    });
-
-    return () => {
-      document.removeEventListener('keydown', closeAllPopups);
-    }
-  });
 
   return (
   <div className={`popup ${name}-popup ${isOpened && `popup_opened`}`}>
