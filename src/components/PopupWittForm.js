@@ -1,7 +1,8 @@
 import React from "react";
 import '../index.css';
+import closeAllPopups from "./App.js"
 
-function PopupWithForm({ name, title, isOpened, children, buttonTextContent}) {
+function PopupWithForm({ name, title, isOpened, onClose, children, buttonTextContent}) {
 
   // DRY
   React.useEffect(() => {
