@@ -8,8 +8,8 @@ function Input(props) {
      name={name}
      className={`form__item popup__input form__item_input_${id}`}
      placeholder={placeholder}
-     minLength={type==="text" && minLength}
-     maxLength={type==="text" && maxLength}
+     minLength={minLength.toString()}
+     maxLength={maxLength.toString()}
      autoComplete="off"
      required />
     <span

@@ -63,12 +63,12 @@ function App() {
     <PopupWithForm name="new-item" title="Новое место" isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
     <>
       <Input type="text" id="place" name="name" placeholder="Название"  minLength="2" maxLength="30" />
-      <Input type="url" id="link" name="link" placeholder="Ссылка на картинку" />
+      <Input type="url" id="link" name="link" placeholder="Ссылка на картинку" minLength="false" maxLength="false"/>
     </>
     </PopupWithForm>
 
     <PopupWithForm name="avatar" title="Обновить аватар" isOpened={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
-      <Input type="url" id="avatar" name="avatar" placeholder="Ссылка на картинку" />
+      <Input type="url" id="avatar" name="avatar" placeholder="Ссылка на картинку" minLength="false" maxLength="false"/>
     </PopupWithForm>
 
     <PopupWithForm name="confirm" title="Вы уверены?" onClose={closeAllPopups} buttonTextContent="Да">

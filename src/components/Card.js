@@ -4,7 +4,7 @@ import '../index.css';
 function Card(props) {
 
   const {card, onCardClick} = props
-  const {name, link,likes} = card;
+  const {name, link, likes} = card;
 
 function handleClick() {
   onCardClick(card);

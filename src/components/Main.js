@@ -27,7 +27,12 @@ function Main(props) {
   React.useEffect(() => {
     api.getInitialCards()
     .then((data) => {
-     return data.map(item => { return {name: item.name, link: item.link, likes: item.likes.length}});
+     return data.map(item => { return {
+      name: item.name,
+      link: item.link,
+      likes: item.likes.length,
+      id: item._id,
+    }});
     })
     .then(cards => setCards(cards))
     .catch(err => console.log(err));
@@ -50,7 +55,7 @@ function Main(props) {
         <button className="profile__add-button add-button" type="button" aria-label="Добавить" onClick={onAddPlace}></button>
       </section>
       <section className="elements section content__section">
-        {cards.map((card, index) => (<Card card={card} key={index} onCardClick={onCardClick}/>))}
+        {cards.map((card) => (<Card card={card} key={card.id} onCardClick={onCardClick}/>))}
       </section>
     </main>
   );
