@@ -3,9 +3,7 @@ import '../index.css';
 import api from '../utils/api.js';
 import Card from './Card';
 
-function Main(props) {
-
-  const {onEditAvatar, onEditProfile, onAddPlace, onCardClick} = props;
+function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
   const [userName, setUserName] = React.useState('');
   const [userDescription, setUserDescription] = React.useState('');

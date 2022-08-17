@@ -1,14 +1,13 @@
 import React from 'react';
 import '../index.css';
 
-function Card(props) {
+function Card({card, onCardClick}) {
 
-  const {card, onCardClick} = props
   const {name, link, likes} = card;
 
-function handleClick() {
+  function handleClick() {
   onCardClick(card);
-}
+  }
 
   return (
   <article className="element">

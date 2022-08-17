@@ -1,5 +1,4 @@
-function Input(props) {
-  const {type, id, name, placeholder, minLength, maxLength} = props;
+function Input({type, id, name, placeholder, minLength, maxLength}) {
   return (
     <>
     <input
