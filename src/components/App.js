@@ -6,6 +6,8 @@ import Footer from './Footer';
 import PopupWithForm from './PopupWittForm';
 import ImagePopup from './ImagePopup';
 import Input from './Input';
+import api from '../utils/api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
 
@@ -13,6 +15,14 @@ function App() {
   const [ isAddPlacePopupOpen, setAddPlacePopupOpen ] = React.useState(false);
   const [ isEditAvatarPopupOpen, setEditAvatarPopupOpen ] = React.useState(false);
   const [ selectedCard, setSelectedCard ] = React.useState(null);
+
+  const [ currentUser, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    api.getUserInfo()
+    .then((res) => setUser(res))
+    .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING GO WRONG
+  }, []);
 
   const handleCardClick = (card) => {
     setSelectedCard(card)
@@ -37,6 +47,7 @@ function App() {
   // аааааа я попробовала переместить useEffect keydown Escape столкнулась с дуюлированием кода в двух компонентах и миллионом ошибок в консоли, поэтому решила, что лучше будет его просто удалить >>> the enter 🌔 🚀
 
   return (
+    <CurrentUserContext.Provider value={currentUser}>
     <div className="page"><div className="page__container">
 
     <Header />
@@ -69,6 +80,7 @@ function App() {
     <ImagePopup card={selectedCard} isOpened={handleCardClick} onClose={closeAllPopups}/>
 
    </div></div>
+   </CurrentUserContext.Provider>
   );
 }
 
