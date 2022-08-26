@@ -16,11 +16,11 @@ function App() {
   const [ isEditAvatarPopupOpen, setEditAvatarPopupOpen ] = React.useState(false);
   const [ selectedCard, setSelectedCard ] = React.useState(null);
 
-  const [ currentUser, setUser] = React.useState(null);
+  const [ currentUser, setUser] = React.useState(CurrentUserContext);
 
   React.useEffect(() => {
     api.getUserInfo()
-    .then((res) => setUser(res))
+    .then((res) => setUser(res) )
     .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING GO WRONG
   }, []);
 
