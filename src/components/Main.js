@@ -12,7 +12,6 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
   function handleLikeClick(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
-    console.log(isLiked);
 
     api.like(card, isLiked)
     .then((newCard) => {

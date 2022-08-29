@@ -17,7 +17,6 @@ function Card({card, onCardClick, onCardLike}) {
     onCardLike(card);
   }
 
-
   return (
   <article className="element">
    {isOwner && (<button className="element__delete-button"></button>)}
