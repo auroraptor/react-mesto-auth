@@ -20,6 +20,14 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
     .catch(err => console.log(err));
   }
 
+  function handleCardDelete(card) {
+    api.deleteCard(card)
+    .then(() => {
+      setCards((cards) => cards.filter((c) => c._id !== card._id ))
+    })
+    .catch(err => console.log(err));
+  }
+
   React.useEffect(() => {
     api.getInitialCards()
     .then((data) => {
@@ -52,7 +60,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         <button className="profile__add-button add-button" type="button" aria-label="Добавить" onClick={onAddPlace}></button>
       </section>
       <section className="elements section content__section">
-        {cards.map((card) => (<Card card={card} key={card._id} onCardClick={onCardClick} onCardLike={handleLikeClick}/>))}
+        {cards.map((card) => (<Card card={card} key={card._id} onCardClick={onCardClick} onCardLike={handleLikeClick} onCardDelete={handleCardDelete}/>))}
       </section>
     </main>
   );
