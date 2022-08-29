@@ -18,7 +18,7 @@ class Api {
     return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
   }
 
-  getInitialCards() {
+  getCardList() {
     return fetch(`${this._baseUrl}cards`, {
       headers: {authorization: this._authorization}
     })

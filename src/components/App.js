@@ -5,27 +5,22 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWittForm';
 import ImagePopup from './ImagePopup';
-import Input from './Input';
+// import Input from './Input';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 function App() {
-
   const [ isEditProfilePopupOpen, setEditProfilePopupOpen ] = React.useState(false);
   const [ isAddPlacePopupOpen, setAddPlacePopupOpen ] = React.useState(false);
   const [ isEditAvatarPopupOpen, setEditAvatarPopupOpen ] = React.useState(false);
   const [ selectedCard, setSelectedCard ] = React.useState(null);
-
   const [ currentUser, setUser] = React.useState({name: '', about: '', avatar: ''});
+  const [cards, setCards] = React.useState([]);
 
-  React.useEffect(() => {
-    api.getUserInfo()
-    .then((res) => setUser(res) )
-    .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING GO WRONG
-  }, []);
-
+  //handlers
   const handleCardClick = (card) => {
     setSelectedCard(card)
   };
@@ -38,6 +33,49 @@ function App() {
   const handleAddPlaceClick = () => {
     setAddPlacePopupOpen(true);
   };
+
+  // cards
+  React.useEffect(() => {
+    api.getCardList()
+    .then((data) => {
+     return data.map(item => { return {
+      name: item.name,
+      link: item.link,
+      likes: item.likes,
+      _id: item._id,
+      owner: item.owner,
+    }});
+    })
+    .then(cards => setCards(cards))
+    .catch(err => console.log(err));
+  }, []);
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+
+    api.like(card, isLiked)
+    .then((newCard) => {
+      setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch(err => console.log(err));
+  }
+
+  function handleCardDelete(card) {
+    api.deleteCard(card)
+    .then(() => {
+      setCards((cards) => cards.filter((c) => c._id !== card._id ))
+    })
+    .catch(err => console.log(err));
+  }
+
+
+
+  // user
+  React.useEffect(() => {
+    api.getUserInfo()
+    .then((res) => setUser(res) )
+    .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING GO WRONG
+  }, []);
 
   const handleUpdateUser = (data) => {
     api.editUserInfo(data)
@@ -53,6 +91,13 @@ function App() {
     .finally(() => closeAllPopups())
   }
 
+  const handleAddPlaceSubmit = (data) => {
+    api.postNewCard(data)
+    .then(newCard => setCards([newCard, ...cards]))
+    .catch(err => console.log(err))
+    .finally(() => closeAllPopups())
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
@@ -60,15 +105,13 @@ function App() {
     setSelectedCard(null);
   }
 
-  // аааааа я попробовала переместить useEffect keydown Escape столкнулась с дуюлированием кода в двух компонентах и миллионом ошибок в консоли, поэтому решила, что лучше будет его просто удалить >>> the enter 🌔 🚀
-
   return (
     <CurrentUserContext.Provider value={currentUser}>
     <div className="page"><div className="page__container">
 
     <Header />
 
-    <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick}/>
+    <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
     <Footer />
 
@@ -76,12 +119,7 @@ function App() {
 
     <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 
-    <PopupWithForm name="new-item" title="Новое место" isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
-    <>
-      <Input type="text" id="place" name="name" placeholder="Название"  minLength="2" maxLength="30" />
-      <Input type="url" id="link" name="link" placeholder="Ссылка на картинку" minLength="false" maxLength="false"/>
-    </>
-    </PopupWithForm>
+    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
 
     <PopupWithForm name="confirm" title="Вы уверены?" onClose={closeAllPopups} buttonTextContent="Да">
     </PopupWithForm>

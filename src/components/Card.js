@@ -2,8 +2,8 @@ import React from 'react';
 import '../index.css';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-function Card({card, onCardClick, onCardLike, onCardDelete}) {
-
+function Card(props) {
+  const {card, onCardClick, onCardLike, onCardDelete} = props;
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwner = card.owner._id === currentUser._id;

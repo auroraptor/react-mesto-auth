@@ -1,47 +1,11 @@
 import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import '../index.css';
-import api from '../utils/api.js';
 import Card from './Card';
 
-function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
-
-  const [cards, setCards] = React.useState([]);
-
+function Main(props) {
+  const {onEditAvatar, onEditProfile, onAddPlace, cards} = props;
   const currentUser = React.useContext(CurrentUserContext);
-
-  function handleLikeClick(card) {
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-    api.like(card, isLiked)
-    .then((newCard) => {
-      setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
-    })
-    .catch(err => console.log(err));
-  }
-
-  function handleCardDelete(card) {
-    api.deleteCard(card)
-    .then(() => {
-      setCards((cards) => cards.filter((c) => c._id !== card._id ))
-    })
-    .catch(err => console.log(err));
-  }
-
-  React.useEffect(() => {
-    api.getInitialCards()
-    .then((data) => {
-     return data.map(item => { return {
-      name: item.name,
-      link: item.link,
-      likes: item.likes,
-      _id: item._id,
-      owner: item.owner,
-    }});
-    })
-    .then(cards => setCards(cards))
-    .catch(err => console.log(err));
-  }, []);
 
   return (
     <main className="content">
@@ -60,7 +24,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         <button className="profile__add-button add-button" type="button" aria-label="Добавить" onClick={onAddPlace}></button>
       </section>
       <section className="elements section content__section">
-        {cards.map((card) => (<Card card={card} key={card._id} onCardClick={onCardClick} onCardLike={handleLikeClick} onCardDelete={handleCardDelete}/>))}
+        {cards.map((card) => (<Card card={card} key={card._id} {...props}/>))}
       </section>
     </main>
   );
