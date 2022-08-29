@@ -38,6 +38,13 @@ function App() {
     setAddPlacePopupOpen(true);
   };
 
+  const handleUpdateUser = (data) => {
+    api.editUserInfo(data)
+    .then(res => setUser(res))
+    .catch(err => console.log(err))
+    .finally(() => closeAllPopups());
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
@@ -57,7 +64,7 @@ function App() {
 
     <Footer />
 
-    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
 
     <PopupWithForm name="new-item" title="Новое место" isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
     <>
