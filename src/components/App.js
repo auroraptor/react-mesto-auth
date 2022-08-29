@@ -8,6 +8,7 @@ import ImagePopup from './ImagePopup';
 import Input from './Input';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
   };
-  const handleEitProfileClick = () => {
+  const handleEditProfileClick = () => {
     setEditProfilePopupOpen(true);
   };
   const handleAddPlaceClick = () => {
@@ -52,16 +53,11 @@ function App() {
 
     <Header />
 
-    <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEitProfileClick} onCardClick={handleCardClick}/>
+    <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick}/>
 
     <Footer />
 
-    <PopupWithForm name="edit-profile" title="Редактировать профиль" isOpened={isEditProfilePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
-    <>
-      <Input type="text" id="name" name="name" placeholder="Имя" minLength="2" maxLength="40"></Input>
-      <Input type="text" id="about" name="about" placeholder="О себе" minLength="2" maxLength="200"></Input>
-    </>
-    </PopupWithForm>
+    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
 
     <PopupWithForm name="new-item" title="Новое место" isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
     <>

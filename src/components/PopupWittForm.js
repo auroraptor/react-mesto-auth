@@ -1,10 +1,10 @@
 import React from "react";
 import '../index.css';
 
-function PopupWithForm({ name, title, isOpened, onClose, children, buttonTextContent}) {
+function PopupWithForm({ name, title, isOpen, onClose, children, buttonTextContent}) {
 
   return (
-  <div className={`popup ${name}-popup ${isOpened && `popup_opened`}`}>
+  <div className={`popup ${name}-popup ${isOpen && `popup_opened`}`}>
       <div className="popup__container">
         <button type="button" className="popup__close-icon" aria-label="Закрыть" onClick={onClose}></button>
       <form className={`form ${name}-form popup__form`} name="profile-form" noValidate>
