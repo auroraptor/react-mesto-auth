@@ -1,4 +1,4 @@
-function Input({type, id, name, placeholder, minLength, maxLength}) {
+function Input({type, id, name, placeholder, minLength, maxLength, value, onChange}) {
   return (
     <>
     <input
@@ -10,6 +10,8 @@ function Input({type, id, name, placeholder, minLength, maxLength}) {
      minLength={minLength.toString()}
      maxLength={maxLength.toString()}
      autoComplete="off"
+     value={value}
+     onChange={onChange}
      required />
     <span
      className={`popup__error ${id}-error`} />

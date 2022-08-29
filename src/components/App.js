@@ -17,7 +17,7 @@ function App() {
   const [ isEditAvatarPopupOpen, setEditAvatarPopupOpen ] = React.useState(false);
   const [ selectedCard, setSelectedCard ] = React.useState(null);
 
-  const [ currentUser, setUser] = React.useState(CurrentUserContext);
+  const [ currentUser, setUser] = React.useState({name: '', about: ''});
 
   React.useEffect(() => {
     api.getUserInfo()
