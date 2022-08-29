@@ -9,6 +9,7 @@ import Input from './Input';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
   const [ isEditAvatarPopupOpen, setEditAvatarPopupOpen ] = React.useState(false);
   const [ selectedCard, setSelectedCard ] = React.useState(null);
 
-  const [ currentUser, setUser] = React.useState({name: '', about: ''});
+  const [ currentUser, setUser] = React.useState({name: '', about: '', avatar: ''});
 
   React.useEffect(() => {
     api.getUserInfo()
@@ -45,6 +46,13 @@ function App() {
     .finally(() => closeAllPopups());
   }
 
+  const handleUpdateAvatar = (link) => {
+    api.editUserAvatar(link)
+    .then(res => setUser(res))
+    .catch(err => console.log(err))
+    .finally(() => closeAllPopups())
+  }
+
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
@@ -66,15 +74,13 @@ function App() {
 
     <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
 
+    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+
     <PopupWithForm name="new-item" title="Новое место" isOpened={isAddPlacePopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
     <>
       <Input type="text" id="place" name="name" placeholder="Название"  minLength="2" maxLength="30" />
       <Input type="url" id="link" name="link" placeholder="Ссылка на картинку" minLength="false" maxLength="false"/>
     </>
-    </PopupWithForm>
-
-    <PopupWithForm name="avatar" title="Обновить аватар" isOpened={isEditAvatarPopupOpen} onClose={closeAllPopups} buttonTextContent="Сохранить">
-      <Input type="url" id="avatar" name="avatar" placeholder="Ссылка на картинку" minLength="false" maxLength="false"/>
     </PopupWithForm>
 
     <PopupWithForm name="confirm" title="Вы уверены?" onClose={closeAllPopups} buttonTextContent="Да">

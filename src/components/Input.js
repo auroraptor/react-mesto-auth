@@ -1,7 +1,11 @@
-function Input({type, id, name, placeholder, minLength, maxLength, value, onChange}) {
+import React from "react";
+
+const Input = React.forwardRef((props, ref) => {
+  const {type, id, name, placeholder, minLength, maxLength, value, onChange} = props;
   return (
     <>
     <input
+     ref={ref}
      type={type}
      id={id}
      name={name}
@@ -12,11 +16,12 @@ function Input({type, id, name, placeholder, minLength, maxLength, value, onChan
      autoComplete="off"
      value={value}
      onChange={onChange}
-     required />
+     required
+     />
     <span
      className={`popup__error ${id}-error`} />
     </>
   )
-}
+})
 
 export default Input;
