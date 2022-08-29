@@ -10,6 +10,17 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
   const currentUser = React.useContext(CurrentUserContext);
 
+  function handleLikeClick(card) {
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    console.log(isLiked);
+
+    api.like(card, isLiked)
+    .then((newCard) => {
+      setCards((cards) => cards.map((c) => c._id === card._id ? newCard : c));
+    })
+    .catch(err => console.log(err));
+  }
+
   React.useEffect(() => {
     api.getInitialCards()
     .then((data) => {
@@ -17,7 +28,7 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
       name: item.name,
       link: item.link,
       likes: item.likes,
-      id: item._id,
+      _id: item._id,
       owner: item.owner,
     }});
     })
@@ -42,10 +53,13 @@ function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         <button className="profile__add-button add-button" type="button" aria-label="Добавить" onClick={onAddPlace}></button>
       </section>
       <section className="elements section content__section">
-        {cards.map((card) => (<Card card={card} key={card.id} onCardClick={onCardClick}/>))}
+        {cards.map((card) => (<Card card={card} key={card._id} onCardClick={onCardClick} onCardLike={handleLikeClick}/>))}
       </section>
     </main>
   );
 }
 
 export default Main
+
+// Теперь нужно добавить пропс onCardLike для компонента Card и задать в него эту функцию. Также добавьте в Card обработчик клика handleLikeClick и вызовите из него onCardLike с аргументом card — по аналогии с уже имеющимся обработчиком handleClick.
+

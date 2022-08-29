@@ -79,7 +79,7 @@ class Api {
   }
 
   like(card, isLiked) {
-    return fetch(`${this._baseUrl}cards/${card.id}/likes`, {
+    return fetch(`${this._baseUrl}cards/${card._id}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
       headers: {
         authorization: this._authorization
