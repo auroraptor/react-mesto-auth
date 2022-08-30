@@ -17,10 +17,10 @@ function App() {
   const [ isAddPlacePopupOpen, setAddPlacePopupOpen ] = React.useState(false);
   const [ isEditAvatarPopupOpen, setEditAvatarPopupOpen ] = React.useState(false);
   const [ selectedCard, setSelectedCard ] = React.useState(null);
-  const [ currentUser, setUser] = React.useState({name: '', about: '', avatar: ''});
-  const [cards, setCards] = React.useState([]);
+  const [ currentUser, setUser ] = React.useState({name: '', about: '', avatar: ''});
+  const [ cards, setCards ] = React.useState([]);
 
-  //handlers
+  // handlers
   const handleCardClick = (card) => {
     setSelectedCard(card)
   };
@@ -68,15 +68,14 @@ function App() {
     .catch(err => console.log(err));
   }
 
-
-
   // user
   React.useEffect(() => {
     api.getUserInfo()
     .then((res) => setUser(res) )
-    .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING GO WRONG
+    .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING WENT WRONG
   }, []);
 
+  // patch profile
   const handleUpdateUser = (data) => {
     api.editUserInfo(data)
     .then(res => setUser(res))
@@ -91,6 +90,7 @@ function App() {
     .finally(() => closeAllPopups())
   }
 
+  // upload new card
   const handleAddPlaceSubmit = (data) => {
     api.postNewCard(data)
     .then(newCard => setCards([newCard, ...cards]))
@@ -98,6 +98,7 @@ function App() {
     .finally(() => closeAllPopups())
   }
 
+  // on close
   function closeAllPopups() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
