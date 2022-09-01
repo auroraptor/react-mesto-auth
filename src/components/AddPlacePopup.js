@@ -1,11 +1,11 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import PopupWithForm from "./PopupWittForm";
 import Input from "./Input";
 
 function AddPlacePopup(props) {
   const { onAddPlace } = props;
-  const [ name, setName ] = React.useState('');
-  const [ link, setLink] = React.useState('');
+  const [ name, setName ] = useState('');
+  const [ link, setLink] = useState('');
 
   function handleNameChange(evt) {
     setName(evt.target.value);
@@ -20,6 +20,11 @@ function AddPlacePopup(props) {
 
     onAddPlace({ name, link });
   }
+  // Нужно очищать инпуты при открытии и закрытии попапа, при помощи useEffect и props.isOpen в массиве зависимостей
+  useEffect(() => {
+    setName('');
+    setLink('');
+  }, [props.isOpen])
 
   return (
     <PopupWithForm name="new-item" title="Новое место" buttonTextContent="Сохранить" {...props} onSubmit={handleSubmit}>
