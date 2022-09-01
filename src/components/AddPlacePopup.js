@@ -20,7 +20,7 @@ function AddPlacePopup(props) {
 
     onAddPlace({ name, link });
   }
-  // Нужно очищать инпуты при открытии и закрытии попапа, при помощи useEffect и props.isOpen в массиве зависимостей
+
   useEffect(() => {
     setName('');
     setLink('');
