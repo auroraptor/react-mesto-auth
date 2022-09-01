@@ -1,10 +1,10 @@
-import React from "react";
+import {useRef, useEffect} from "react";
 import PopupWithForm from "./PopupWittForm";
 import Input from "./Input";
 
 function EditAvatarPopup(props) {
   const { onUpdateAvatar } = props;
-  const inputRef = React.useRef();
+  const inputRef = useRef();
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -13,6 +13,10 @@ function EditAvatarPopup(props) {
       avatar: inputRef.current.value,
     })
   }
+
+  useEffect(() => {
+    inputRef.current.value='';
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm name="avatar" title="Обновить аватар" {...props} buttonTextContent="Сохранить" onSubmit={handleSubmit}>
