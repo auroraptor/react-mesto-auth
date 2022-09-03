@@ -6,7 +6,6 @@ function AddPlacePopup(props) {
   const { onAddPlace, buttonText } = props;
   const [ name, setName ] = useState('');
   const [ link, setLink] = useState('');
-  // const [ buttonTextContent, setButtonTextContent] = useState("Сохранить")
 
   function handleNameChange(evt) {
     setName(evt.target.value);
@@ -18,7 +17,6 @@ function AddPlacePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // setButtonTextContent('Сохранение')
     onAddPlace({ name, link });
   }
 
