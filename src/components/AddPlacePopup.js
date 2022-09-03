@@ -3,9 +3,10 @@ import PopupWithForm from "./PopupWittForm";
 import Input from "./Input";
 
 function AddPlacePopup(props) {
-  const { onAddPlace } = props;
+  const { onAddPlace, buttonText } = props;
   const [ name, setName ] = useState('');
   const [ link, setLink] = useState('');
+  // const [ buttonTextContent, setButtonTextContent] = useState("Сохранить")
 
   function handleNameChange(evt) {
     setName(evt.target.value);
@@ -17,7 +18,7 @@ function AddPlacePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
+    // setButtonTextContent('Сохранение')
     onAddPlace({ name, link });
   }
 
@@ -27,7 +28,7 @@ function AddPlacePopup(props) {
   }, [props.isOpen])
 
   return (
-    <PopupWithForm name="new-item" title="Новое место" buttonTextContent="Сохранить" {...props} onSubmit={handleSubmit}>
+    <PopupWithForm name="new-item" title="Новое место" buttonTextContent={buttonText} {...props} onSubmit={handleSubmit}>
     <>
       <Input type="text" id="place" name="name" placeholder="Название"  minLength="2" maxLength="30" value={name} onChange={handleNameChange}/>
       <Input type="url" id="link" name="link" placeholder="Ссылка на картинку" minLength="false" maxLength="false" value={link} onChange={handleLinkChange}/>

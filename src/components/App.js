@@ -18,6 +18,7 @@ function App() {
   const [ selectedCard, setSelectedCard ] = useState(null);
   const [ currentUser, setUser ] = useState({name: '', about: '', avatar: ''});
   const [ cards, setCards ] = useState([]);
+  const [ buttonTextContent, setButtonTextContent] = useState("Сохранить")
 
   // handlers
   const handleCardClick = (card) => {
@@ -76,25 +77,39 @@ function App() {
 
   // patch profile
   const handleUpdateUser = (data) => {
+    setButtonTextContent('Сохранение');
+
     api.editUserInfo(data)
     .then(res => setUser(res))
     .catch(err => console.log(err))
-    .finally(() => closeAllPopups());
+    .finally(() => {
+      closeAllPopups();
+      setButtonTextContent("Сохранить")
+    })
   }
 
   const handleUpdateAvatar = (link) => {
+    setButtonTextContent('Сохранение');
+
     api.editUserAvatar(link)
     .then(res => setUser(res))
     .catch(err => console.log(err))
-    .finally(() => closeAllPopups())
+    .finally(() => {
+      closeAllPopups();
+      setButtonTextContent("Сохранить")
+    })
   }
 
   // upload new card
   const handleAddPlaceSubmit = (data) => {
+    setButtonTextContent('Сохранение');
     api.postNewCard(data)
     .then(newCard => setCards([newCard, ...cards]))
     .catch(err => console.log(err))
-    .finally(() => closeAllPopups())
+    .finally(() => {
+      closeAllPopups();
+      setButtonTextContent("Сохранить")
+    })
   }
 
   // on close
@@ -115,11 +130,11 @@ function App() {
 
     <Footer />
 
-    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} buttonText={buttonTextContent}/>
 
-    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} buttonText={buttonTextContent}/>
 
-    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
+    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} buttonText={buttonTextContent}></AddPlacePopup>
 
     <PopupWithForm name="confirm" title="Вы уверены?" onClose={closeAllPopups} buttonTextContent="Да">
     </PopupWithForm>
