@@ -1,5 +1,6 @@
 # mesto-react
 
+<img src="./src/images/logo_color_black.svg" width="100" heigth="100" alt="Logo">
 ## Обзор
 
 [mesto-react](https://auroraptor.github.io/mesto-react/)
