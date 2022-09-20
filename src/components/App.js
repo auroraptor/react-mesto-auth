@@ -101,26 +101,45 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <div className="page"><div className="page__container">
 
     <Header />
 
-    <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
+    <Main
+    onEditAvatar={handleEditAvatarClick}
+    onAddPlace={handleAddPlaceClick}
+    onEditProfile={handleEditProfileClick}
+    onCardClick={handleCardClick}
+    cards={cards}
+    onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
     <Footer />
 
-    <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+    <EditProfilePopup
+    isOpen={isEditProfilePopupOpen}
+    onClose={closeAllPopups}
+    onUpdateUser={handleUpdateUser}/>
 
-    <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+    <EditAvatarPopup
+    isOpen={isEditAvatarPopupOpen}
+    onClose={closeAllPopups}
+    onUpdateAvatar={handleUpdateAvatar}/>
 
-    <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}></AddPlacePopup>
+    <AddPlacePopup
+    isOpen={isAddPlacePopupOpen}
+    onClose={closeAllPopups}
+    onAddPlace={handleAddPlaceSubmit} />
 
-    <PopupWithForm name="confirm" title="Вы уверены?" onClose={closeAllPopups} buttonTextContent="Да">
-    </PopupWithForm>
+    <PopupWithForm
+    name="confirm"
+    title="Вы уверены?"
+    onClose={closeAllPopups}
+    buttonTextContent="Да" />
 
-    <ImagePopup card={selectedCard} isOpened={handleCardClick} onClose={closeAllPopups}/>
+    <ImagePopup
+    card={selectedCard}
+    isOpened={handleCardClick}
+    onClose={closeAllPopups}/>
 
-   </div></div>
    </CurrentUserContext.Provider>
   );
 }
