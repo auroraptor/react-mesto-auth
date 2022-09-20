@@ -1,5 +1,5 @@
 {
-  "name": "mesto-react",
+  "name": "mesto-react-auth",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://auroraptor.github.io/mesto-react/",
@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
@@ -39,6 +40,18 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0"
+    "gh-pages": "^4.0.0",
+    "webpack": "^5.74.0"
+  },
+  "description": "<img src=\"./src/images/logo_color_black.svg\" width=\"100\" heigth=\"100\" alt=\"Logo\">",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/auroraptor/react-mesto-auth.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/auroraptor/react-mesto-auth/issues"
   }
 }
