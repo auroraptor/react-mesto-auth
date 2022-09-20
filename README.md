@@ -1,15 +1,14 @@
 # mesto-react
 
 <img src="./src/images/logo_color_black.svg" width="100" heigth="100" alt="Logo">
+
 ## Обзор
 
-[mesto-react](https://auroraptor.github.io/mesto-react/)
+![gif](https://media.giphy.com/media/8XCvP5xWh7czYbU0Cq/giphy.gif)
 
-### Описание проекта
+[mesto](https://auroraptor.github.io/mesto-react/)
 
-* Интерактивная страница.
-
-### Какие технологии использовались
+## Интерактивная страница
 
 - Grid Layout: вёрстка адаптивная -- ширина зоны с содержимым должна меняться вместе с шириной окна браузера;
 
@@ -17,11 +16,11 @@
 
 - React.js: функции лайков, добавления карточек, редактирование профиля реализованы через контекст текущего пользователя;
 
-#### Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-##### `npm start`
+#### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -29,7 +28,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-##### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
