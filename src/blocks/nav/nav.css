@@ -8,6 +8,11 @@
   margin-right: 0;
 }
 
+.nav:hover {
+  opacity: 0.6;
+  transition: opacity .5s linear;
+}
+
 @media screen and (max-widt: 450px) {
   .nav {
     font-size: 14px;

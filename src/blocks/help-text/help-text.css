@@ -11,3 +11,8 @@
   color: #fff;
   cursor: pointer;
 }
+
+.help-text__link:hover {
+  opacity: 0.6;
+  transition: opacity .5s linear;
+}

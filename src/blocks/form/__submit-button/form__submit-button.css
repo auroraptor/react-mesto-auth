@@ -25,11 +25,16 @@
   line-height: 22px;
   text-align: center;
   margin-top: 216px;
+  cursor: pointer;
 }
-
 
 .form__submit-button:hover {
   opacity: 0.8;
+  transition: opacity .5s linear;
+}
+
+.form__submit-button_theme_white:hover {
+  opacity: 0.85;
   transition: opacity .5s linear;
 }
 
