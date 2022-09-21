@@ -102,7 +102,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
-    <Header />
+    <Header link="/sign-in" text="Выйти" />
 
     <Main
     onEditAvatar={handleEditAvatarClick}
