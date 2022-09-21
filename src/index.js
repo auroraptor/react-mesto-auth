@@ -21,26 +21,23 @@ root.render(
           name="register"
           title="Регистрация"
           buttonTextContent="Зарегестрироваться">
-            <Input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            minLength="false"
-            maxLength="false"
-            sign = "form__item_input_sign"
-            ></Input>
-            <Input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Пароль"
-            minLength="8"
-            maxLength="40"
-            sign = "form__item_input_sign"
-            ></Input>
+            <Input type="email" id="email" name="email"
+            placeholder="Email"  minLength="false" maxLength="false"
+            sign = "form__item_input_sign" />
+            <Input type="password" id="password" name="password"
+            placeholder="Пароль" minLength="8" maxLength="40"
+            sign = "form__item_input_sign" />
           </Register>} />
-        <Route path="/sign-in" element={<Login />}></Route>
+        <Route path="/sign-in" element={
+        <Login
+          name="login" title="Вход" buttonTextContent="Войти">
+           <Input type="email" id="email" name="email"
+            placeholder="Email"  minLength="false" maxLength="false"
+            sign = "form__item_input_sign" />
+            <Input type="password" id="password" name="password"
+            placeholder="Пароль" minLength="8" maxLength="40"
+            sign = "form__item_input_sign" />
+        </Login>} />
       </Routes>
     </Router>
     </div></div>
