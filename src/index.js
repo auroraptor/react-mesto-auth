@@ -5,6 +5,7 @@ import './index.css';
 import App from './components/App';
 import Register from './components/Register';
 import Login from './components/Login';
+import Input from './components/Input';
 import reportWebVitals from './reportWebVitals';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -15,7 +16,28 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<App />}></Route>
-        <Route path="/sign-up" element={<Register />}></Route>
+        <Route path="/sign-up" element={
+          <Register
+          name="register"
+          title="Регистрация"
+          buttonTextContent="Зарегестрироваться">
+            <Input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+            minLength="false"
+            maxLength="false"
+            ></Input>
+            <Input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Пароль"
+            minLength="8"
+            maxLength="40"
+            ></Input>
+          </Register>} />
         <Route path="/sign-in" element={<Login />}></Route>
       </Routes>
     </Router>
