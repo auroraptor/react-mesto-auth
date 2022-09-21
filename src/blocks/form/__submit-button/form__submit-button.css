@@ -24,6 +24,7 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+  margin-top: 216px;
 }
 
 
@@ -38,6 +39,11 @@
     width: calc(238px + ((100vw - 320px) / (1280 - 320)) * (358 - 238));
     font-size: calc(14px + ((100vw - 320px) / (1280 - 320)) * (18 - 14));
     line-height: calc(17px + ((100vw - 320px) / (1280 - 320)) * (22 - 17));
-    /* margin-top: calc(45px + ((100vw - 320px) / (1280 - 320)) * (15 - 45)); */
+  }
+  .form__submit-button_theme_white {
+    height: calc(46px + ((100vw - 320px) / (1280 - 320)) * (50.15 - 46));
+    width: calc(238px + ((100vw - 320px) / (1280 - 320)) * (358 - 238));
+    font-size: calc(14px + ((100vw - 320px) / (1280 - 320)) * (18 - 14));
+    line-height: calc(17px + ((100vw - 320px) / (1280 - 320)) * (22 - 17));
   }
 }

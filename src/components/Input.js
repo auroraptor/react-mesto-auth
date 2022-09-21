@@ -9,7 +9,7 @@ const Input = forwardRef((props, ref) => {
      type={type}
      id={id}
      name={name}
-     className={`form__item popup__input form__item_input_${id}`}
+     className={`form__item popup__input form__item_input_${id} ${props?.sign}`}
      placeholder={placeholder}
      minLength={minLength.toString()}
      maxLength={maxLength.toString()}

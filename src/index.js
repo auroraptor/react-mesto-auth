@@ -28,6 +28,7 @@ root.render(
             placeholder="Email"
             minLength="false"
             maxLength="false"
+            sign = "form__item_input_sign"
             ></Input>
             <Input
             type="password"
@@ -36,6 +37,7 @@ root.render(
             placeholder="Пароль"
             minLength="8"
             maxLength="40"
+            sign = "form__item_input_sign"
             ></Input>
           </Register>} />
         <Route path="/sign-in" element={<Login />}></Route>
