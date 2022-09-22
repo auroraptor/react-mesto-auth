@@ -10,21 +10,14 @@ function Register(props) {
     <Header link="/sign-in" text="Войти" elem={<Login />}/>
     <form
     className={`form_theme_white ${props.name}-form`}
-    name="profile-form"
+    name="register"
     onSubmit={props.onSubmit}>
-      <label className="heading__register">{props.title}</label>
+      <label className="heading__register">Регистрация</label>
           <Input type="email" id="email" name="email"
-            placeholder="Email"  minLength="false" maxLength="false"
-            sign = "form__item_input_sign" />
+            placeholder="Email"  minLength="false" maxLength="false"/>
           <Input type="password" id="password" name="password"
-            placeholder="Пароль" minLength="8" maxLength="40"
-            sign = "form__item_input_sign"/>
-        <button
-        type="submit"
-        className="form__submit-button_theme_white"
-        value="disable">
-          {props.buttonTextContent}
-        </button>
+            placeholder="Пароль" minLength="8" maxLength="40"/>
+        <button type="submit" className="form__submit-button_theme_white" value="disable">Зарегестрироваться</button>
     </form>
     <div className="help-text">
       <span>Уже зарегестрированы? </span>

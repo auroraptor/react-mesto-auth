@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import App from './components/App';
 import Register from './components/Register';
 import Login from './components/Login';
+import NotFound from './components/NotFound';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,14 +18,9 @@ root.render(
         <Route element={<ProtectedRoute/>}>
           <Route element={<App/>} path="/" exact></Route>
         </Route>
-        <Route path="/sign-up" element={
-          <Register
-          name="register"
-          title="Регистрация"
-          buttonTextContent="Зарегестрироваться" />}/>
-        <Route path="/sign-in" element={
-        <Login
-          name="login" title="Вход" buttonTextContent="Войти" />}/>
+        <Route element={<Register/>} path="/sign-up" />
+        <Route element={<Login/>} path="/sign-in"/>
+        <Route element={<NotFound/>} path="/*"/>
         </Routes>
       </Router>
     </div></div>
