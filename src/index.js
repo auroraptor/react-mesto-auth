@@ -21,7 +21,8 @@ root.render(
         </Route>
         <Route element={<Register/>} path="/sign-up" />
         <Route element={<Login/>} path="/sign-in"/>
-        <Route element={<InfoTooltip/>} path="/*"/>
+        <Route element={<InfoTooltip/>} path="/test"/>
+        <Route element={<NotFound/>} path="/*"/>
         </Routes>
       </Router>
     </div></div>
