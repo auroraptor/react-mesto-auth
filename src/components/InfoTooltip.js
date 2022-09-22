@@ -5,7 +5,7 @@ function InfoTooltip(props) {
 
   return (
     <div className="popup popup_opened">
-    <div className="popup__container">
+    <div className="info">
       <button type="button" className="popup__close-icon" aria-label="Закрыть"></button>
       <div className="info">
         <div className={`info_type_${isSuccess?'success':'warning'}`}/>
