@@ -1,0 +1,32 @@
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  width: 430px;
+  height: 330px;
+}
+
+.info_type_success {
+  margin-top: 60px;
+  width: 120px;
+  height: 120px;
+  background-image: url(../../images/success.svg);
+}
+
+.info_type_warning{
+  margin-top: 60px;
+  width: 120px;
+  height: 120px;
+  background-image: url(../../images/warning.svg);
+}
+
+.info__text {
+  margin-top: 32px;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: black;
+  white-space: pre-line;
+}
