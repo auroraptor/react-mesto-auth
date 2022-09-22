@@ -1,18 +1,21 @@
 import React from "react"
 import Header from "./Header"
-import Register from "./Register"
+import Input from "./Input"
 
 function Login(props) {
 
   return (
     <div>
-    <Header link="/sign-up" text="Регистрация" elem={<Register />}/>
+    <Header link="/sign-up" text="Регистрация"/>
     <form
     className={`form_theme_white ${props.name}-form`}
-    name="profile-form"
+    name={props.name}
     onSubmit={props.onSubmit}>
       <label className="heading__register">{props.title}</label>
-        <>{props.children}</>
+        <Input type="email" id="email" name="email"
+            placeholder="Email"  minLength="false" maxLength="false"/>
+        <Input type="password" id="password" name="password"
+            placeholder="Пароль" minLength="8" maxLength="40"/>
         <button
         type="submit"
         className="form__submit-button_theme_white"

@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
+import ProtectedRoute from './components/ProtectedRoute';
 import App from './components/App';
 import Register from './components/Register';
 import Login from './components/Login';
-import Input from './components/Input';
 import reportWebVitals from './reportWebVitals';
-import ProtectedRoute from './components/ProtectedRoute';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,31 +14,19 @@ root.render(
     <div className="page"><div className="page__container">
     <Router>
       <Routes>
-        <Route path="/" element={<App />}></Route>
+        <Route element={<ProtectedRoute/>}>
+          <Route element={<App/>} path="/" exact></Route>
+        </Route>
         <Route path="/sign-up" element={
           <Register
           name="register"
           title="Регистрация"
-          buttonTextContent="Зарегестрироваться">
-            <Input type="email" id="email" name="email"
-            placeholder="Email"  minLength="false" maxLength="false"
-            sign = "form__item_input_sign" />
-            <Input type="password" id="password" name="password"
-            placeholder="Пароль" minLength="8" maxLength="40"
-            sign = "form__item_input_sign" />
-          </Register>} />
+          buttonTextContent="Зарегестрироваться" />}/>
         <Route path="/sign-in" element={
         <Login
-          name="login" title="Вход" buttonTextContent="Войти">
-           <Input type="email" id="email" name="email"
-            placeholder="Email"  minLength="false" maxLength="false"
-            sign = "form__item_input_sign" />
-            <Input type="password" id="password" name="password"
-            placeholder="Пароль" minLength="8" maxLength="40"
-            sign = "form__item_input_sign" />
-        </Login>} />
-      </Routes>
-    </Router>
+          name="login" title="Вход" buttonTextContent="Войти" />}/>
+        </Routes>
+      </Router>
     </div></div>
   </React.StrictMode>
 );

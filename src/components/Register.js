@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import Login from "./Login";
+import Input from "./Input";
 
 function Register(props) {
   return (
@@ -12,7 +13,12 @@ function Register(props) {
     name="profile-form"
     onSubmit={props.onSubmit}>
       <label className="heading__register">{props.title}</label>
-        <>{props.children}</>
+          <Input type="email" id="email" name="email"
+            placeholder="Email"  minLength="false" maxLength="false"
+            sign = "form__item_input_sign" />
+          <Input type="password" id="password" name="password"
+            placeholder="Пароль" minLength="8" maxLength="40"
+            sign = "form__item_input_sign"/>
         <button
         type="submit"
         className="form__submit-button_theme_white"
