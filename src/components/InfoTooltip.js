@@ -1,15 +1,15 @@
 function InfoTooltip(props) {
-  let isSuccess = true;
   const successMessage = `Вы успешно\n зарегистрировались!`
   const errorMessage = `Что-то пошло не так!\n Попробуйте ещё раз.`
+  console.log(props);
 
   return (
-    <div className="popup popup_opened">
+    <div className={props?.isOpen ? 'popup_opened popup': 'popup'}>
     <div className="info">
-      <button type="button" className="popup__close-icon" aria-label="Закрыть"></button>
+      <button type="button" className="popup__close-icon" aria-label="Закрыть" onClick={props?.onClick}/>
       <div className="info">
-        <div className={`info_type_${isSuccess?'success':'warning'}`}/>
-        <p className="info__text">{isSuccess?successMessage:errorMessage}</p>
+        <div className={`info_type_${props.isSuccess ?'success':'warning'}`}/>
+        <p className="info__text">{props.isSuccess ?successMessage : errorMessage}</p>
        </div>
       </div>
     </div>
