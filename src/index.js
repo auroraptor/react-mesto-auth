@@ -7,7 +7,6 @@ import App from './components/App';
 import Register from './components/Register';
 import Login from './components/Login';
 import NotFound from './components/NotFound';
-import InfoTooltip from './components/InfoTooltip';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -21,10 +20,9 @@ root.render(
         </Route>
         <Route element={<Register/>} path="/sign-up" />
         <Route element={<Login/>} path="/sign-in"/>
-        <Route element={<InfoTooltip/>} path="/test"/>
         <Route element={<NotFound/>} path="/*"/>
-        </Routes>
-      </Router>
+      </Routes>
+    </Router>
     </div></div>
   </React.StrictMode>
 );
