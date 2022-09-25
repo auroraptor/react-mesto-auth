@@ -1,7 +1,6 @@
 function InfoTooltip(props) {
   const successMessage = `Вы успешно\n зарегистрировались!`
   const errorMessage = `Что-то пошло не так!\n Попробуйте ещё раз.`
-  console.log(props);
 
   return (
     <div className={props?.isOpen ? 'popup_opened popup': 'popup'}>

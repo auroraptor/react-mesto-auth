@@ -7,7 +7,8 @@ function Header(props) {
     return (
     <header className="header page__header section">
         <a href="#" className="logo header__logo"></a>
-        <Link className="nav" to={props?.link}>{props?.text}</Link>
+        <Link className="nav" to={props?.link} onClick={localStorage.removeItem("jwt")}>{props?.text}</Link>
+
     </header>
     );
 }
