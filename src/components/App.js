@@ -1,4 +1,9 @@
 import { useState, useEffect } from 'react';
+import { Route, Routes} from 'react-router-dom';
+import Login from './Login';
+import Register from './Register';
+import ProtectedRoute from './ProtectedRoute';
+import NotFound from './NotFound';
 import '../index.css';
 import Header from './Header';
 import Main from './Main';
@@ -120,47 +125,31 @@ function App() {
   }
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <Routes>
+      <Route element={<ProtectedRoute/>}>
+          <Route path="/*" element= {
+            <CurrentUserContext.Provider value={currentUser}>
+              <Header link="/sign-in" text="Выйти" email={state?.email}/>
 
-    <Header link="/sign-in" text="Выйти" email={state?.email}/>
+              <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
-    <Main
-    onEditAvatar={handleEditAvatarClick}
-    onAddPlace={handleAddPlaceClick}
-    onEditProfile={handleEditProfileClick}
-    onCardClick={handleCardClick}
-    cards={cards}
-    onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
+              <Footer />
 
-    <Footer />
+              <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
 
-    <EditProfilePopup
-    isOpen={isEditProfilePopupOpen}
-    onClose={closeAllPopups}
-    onUpdateUser={handleUpdateUser}/>
+              <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 
-    <EditAvatarPopup
-    isOpen={isEditAvatarPopupOpen}
-    onClose={closeAllPopups}
-    onUpdateAvatar={handleUpdateAvatar}/>
+              <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
 
-    <AddPlacePopup
-    isOpen={isAddPlacePopupOpen}
-    onClose={closeAllPopups}
-    onAddPlace={handleAddPlaceSubmit} />
+              <PopupWithForm name="confirm" title="Вы уверены?" onClose={closeAllPopups} buttonTextContent="Да" />
 
-    <PopupWithForm
-    name="confirm"
-    title="Вы уверены?"
-    onClose={closeAllPopups}
-    buttonTextContent="Да" />
-
-    <ImagePopup
-    card={selectedCard}
-    isOpened={handleCardClick}
-    onClose={closeAllPopups}/>
-
-   </CurrentUserContext.Provider>
+              <ImagePopup card={selectedCard} isOpened={handleCardClick} onClose={closeAllPopups}/>
+            </CurrentUserContext.Provider>}/>
+      </Route>
+      <Route element={<Register/>} path="/sign-up" />
+      <Route element={<Login/>} path="/sign-in"/>
+      <Route element={<NotFound/>} path="/*"/>
+    </Routes>
   );
 }
 
