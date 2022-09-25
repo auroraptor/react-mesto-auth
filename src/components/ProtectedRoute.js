@@ -1,7 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 
 function ProtectedRoute() {
-  console.log(localStorage.getItem('jwt'));
   let auth = {'token': localStorage.getItem('jwt')}
 
   return (

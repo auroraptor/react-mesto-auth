@@ -18,6 +18,7 @@ function App() {
   const [ selectedCard, setSelectedCard ] = useState(null);
   const [ currentUser, setUser ] = useState({name: '', about: '', avatar: ''});
   const [ cards, setCards ] = useState([]);
+  const [ state, setState] = useState({})
 
   const handleCardClick = (card) => {
     setSelectedCard(card)
@@ -44,6 +45,25 @@ function App() {
     }});
     })
     .then(cards => setCards(cards))
+    .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    if (!localStorage.getItem('jwt')) return;
+
+    const jwt = localStorage.getItem('jwt');
+
+    api.getContent(jwt)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+
+      const userData = {
+        '_id': res.data._id,
+        'email': res.data.email
+      }
+      setState(userData)
+    })
     .catch(err => console.log(err));
   }, []);
 
@@ -102,7 +122,7 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
 
-    <Header link="/sign-in" text="Выйти" />
+    <Header link="/sign-in" text="Выйти" email={state?.email}/>
 
     <Main
     onEditAvatar={handleEditAvatarClick}
