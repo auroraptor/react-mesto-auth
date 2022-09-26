@@ -7,8 +7,8 @@ function InfoTooltip(props) {
     <div className="info">
       <button type="button" className="popup__close-icon" aria-label="Закрыть" onClick={props?.onClick}/>
       <div className="info">
-        <div className={`info_type_${props.isSuccess ?'success':'warning'}`}/>
-        <p className="info__text">{props.isSuccess ?successMessage : errorMessage}</p>
+        <div className={`info_type_${props?.success ?'success':'warning'}`}/>
+        <p className="info__text">{props?.success ?successMessage : errorMessage}</p>
        </div>
       </div>
     </div>

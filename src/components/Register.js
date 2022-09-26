@@ -6,10 +6,10 @@ import Input from "./Input";
 import api from "../utils/api";
 import InfoTooltip from "./InfoTooltip";
 
-function Register() {
+function Register(props) {
   const [state, setState] = useState({'email': '', 'password': ''});
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
-  const [success, setSuccess] = useState(false);
+  // const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  // const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (evt) => {
@@ -24,18 +24,20 @@ function Register() {
     evt.preventDefault();
     const {email, password} = state;
 
-    api.register(password, email)
-    .then(() => setSuccess(true))
-    .catch((err) => {
-      setSuccess(false);
-      console.log('error', err);
-    })
-    .finally(() => setInfoTooltipOpen(true));
+    props.onRegister(email, password);
+
+    // api.register(password, email)
+    // .then(() => setSuccess(true))
+    // .catch((err) => {
+    //   setSuccess(false);
+    //   console.log('error', err);
+    // })
+    // .finally(() => setInfoTooltipOpen(true));
   }
 
-  useEffect(() => {
-    if (!isInfoTooltipOpen && success) navigate('/sign-in');
-  }, [isInfoTooltipOpen]);
+  // useEffect(() => {
+  //   if (!props?.isOpen && props?.success) navigate('/sign-in');
+  // }, [props?.isOpen, props?.success]);
 
   return (
     <>
@@ -55,7 +57,7 @@ function Register() {
       <span>Уже зарегестрированы? </span>
       <Link className="help-text__link" to="/sign-in">Войти</Link>
     </div>
-    <InfoTooltip isOpen={isInfoTooltipOpen} isSuccess={success} onClick={() => {setInfoTooltipOpen(false)}}/>
+    <InfoTooltip {...props} onClick={() => {props.closeInfoTooltip(false)}}/>
     </>)
 }
 

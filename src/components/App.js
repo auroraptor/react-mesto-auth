@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Routes} from 'react-router-dom';
+import { Route, Routes, useNavigate} from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
 import ProtectedRoute from './ProtectedRoute';
@@ -23,8 +23,10 @@ function App() {
   const [ selectedCard, setSelectedCard ] = useState(null);
   const [ currentUser, setUser ] = useState({name: '', about: '', avatar: ''});
   const [ cards, setCards ] = useState([]);
-  const [ state, setState] = useState({})
-  // console.log(size);
+  const [ content, setContent] = useState({})
+  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleCardClick = (card) => {
     setSelectedCard(card)
@@ -68,10 +70,29 @@ function App() {
         '_id': res.data._id,
         'email': res.data.email
       }
-      setState(userData)
+      setContent(userData)
     })
     .catch(err => console.log(err));
   }, []);
+
+  function handleLogin(email, password) {
+    api.login(password, email)
+    .then((data) => {
+      localStorage.setItem('jwt', data.token);
+    })
+    .then(() => navigate('/'))
+    .catch(err => console.log(err))
+  }
+
+  function handleRegister(email, password) {
+    api.register(password, email)
+    .then(() => setSuccess(true))
+    .catch((err) => {
+      setSuccess(false);
+      console.log('error', err);
+    })
+    .finally(() => setInfoTooltipOpen(true));
+  }
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -96,6 +117,10 @@ function App() {
     .then((res) => setUser(res) )
     .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING WENT WRONG
   }, []);
+
+  useEffect(() => {
+    if (!isInfoTooltipOpen && success) navigate('/sign-in');
+  }, [isInfoTooltipOpen, success]);
 
   const handleUpdateUser = (data) => {
     api.editUserInfo(data)
@@ -130,7 +155,7 @@ function App() {
       <Route element={<ProtectedRoute/>}>
           <Route path="/*" element= {
             <CurrentUserContext.Provider value={currentUser}>
-              <Header link="/sign-in" text="Выйти" email={state?.email}></Header>
+              <Header link="/sign-in" text="Выйти" email={content?.email}></Header>
 
               <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
@@ -147,8 +172,8 @@ function App() {
               <ImagePopup card={selectedCard} isOpened={handleCardClick} onClose={closeAllPopups}/>
             </CurrentUserContext.Provider>}/>
       </Route>
-      <Route element={<Register/>} path="/sign-up" />
-      <Route element={<Login/>} path="/sign-in"/>
+      <Route element={<Register success={success} isOpen={isInfoTooltipOpen} onRegister={handleRegister} closeInfoTooltip={setInfoTooltipOpen}/>}  path="/sign-up" />
+      <Route element={<Login onLogin={handleLogin}/>} path="/sign-in"/>
       <Route element={<NotFound/>} path="/*"/>
     </Routes>
   );

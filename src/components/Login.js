@@ -1,13 +1,10 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
 import Header from "./Header"
 import Input from "./Input"
-import api from "../utils/api";
 
-function Login() {
+function Login(props) {
   const initValues = {'email': '', 'password': ''};
   const [state, setState] = useState(initValues);
-  const navigate = useNavigate();
 
   const handleChange = (evt) => {
     const {name, value} = evt.target;
@@ -21,14 +18,7 @@ function Login() {
     evt.preventDefault();
     const {email, password} = state;
 
-    api.login(password, email)
-    .then((data) => {
-      localStorage.setItem('jwt', data.token);
-      navigate('/');
-    })
-    .catch((err) => {
-      console.log('error', err);
-    });
+    props.onLogin(email, password)
   }
 
   return (
