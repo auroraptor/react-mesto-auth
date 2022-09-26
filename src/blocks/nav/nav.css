@@ -44,8 +44,10 @@
 
 .icon-one {
   position: absolute;
-  top: 42px;
+  top: 32px;
   left: 266px;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 }
 
@@ -54,8 +56,7 @@
 }
 
 .hamburger {
-  top:5%;
-  left: 10%;
+  top: 10px;
   width: 24px;
   height: 3px;
   background: #FFF;
