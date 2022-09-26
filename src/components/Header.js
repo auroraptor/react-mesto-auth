@@ -1,17 +1,34 @@
-import {memo} from 'react';
+import {memo, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
+import useWindowSize from '../hooks/useWindowSize';
 import '../index.css';
+import NavBar from './NavBar';
 
 const Header = (props) => {
-  const removeJwt = () => localStorage.removeItem('jwt');
+  const size = useWindowSize();
+  const [click, setClick] = useState(false)
+  const handleClick = () => {
+    setClick(!click);
+  }
+
     return (
-    <header className="header page__header section">
+    <header className="page__header section">
+      {click &&
+      <div className="header_type_slider">
+        <NavBar {...props} click={click}/>
+      </div>}
+      <div className="header">
         <Logo />
-        <div className="nav">
-          <p className="nav__email">{props?.email}</p>
-          <Link className={`nav__link ${props?.email && 'nav__link_logged-in'}`} to={props?.link} onClick={removeJwt}>{props?.text}</Link>
+        {size.width <= 450 && props.text === "Выйти"
+        ?
+        <div className={click ? "icon-one active-one" : "icon-one"} onClick={handleClick}>
+          <div className="hamburger hamburger-one" />
         </div>
+        :
+        <NavBar {...props}/>
+        }
+      </div>
     </header>
     );
 }

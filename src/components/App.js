@@ -24,6 +24,7 @@ function App() {
   const [ currentUser, setUser ] = useState({name: '', about: '', avatar: ''});
   const [ cards, setCards ] = useState([]);
   const [ state, setState] = useState({})
+  // console.log(size);
 
   const handleCardClick = (card) => {
     setSelectedCard(card)
@@ -129,7 +130,7 @@ function App() {
       <Route element={<ProtectedRoute/>}>
           <Route path="/*" element= {
             <CurrentUserContext.Provider value={currentUser}>
-              <Header link="/sign-in" text="Выйти" email={state?.email}/>
+              <Header link="/sign-in" text="Выйти" email={state?.email}></Header>
 
               <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
