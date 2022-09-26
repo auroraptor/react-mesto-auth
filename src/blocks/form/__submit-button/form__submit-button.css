@@ -13,17 +13,43 @@
   cursor: pointer;
 }
 
+.form__submit-button_theme_white {
+  background: #FFF;
+  color: #000000;
+  width: 358px;
+  height: 50px;
+  border-radius: 2px;
+  border: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  margin-top: 216px;
+  cursor: pointer;
+}
+
 .form__submit-button:hover {
   opacity: 0.8;
   transition: opacity .5s linear;
 }
 
-@media (max-width: 1280px) {
+.form__submit-button_theme_white:hover {
+  opacity: 0.85;
+  transition: opacity .5s linear;
+}
+
+@media screen and (max-width: 1280px) {
   .form__submit-button {
     height: calc(46px + ((100vw - 320px) / (1280 - 320)) * (50.15 - 46));
     width: calc(238px + ((100vw - 320px) / (1280 - 320)) * (358 - 238));
     font-size: calc(14px + ((100vw - 320px) / (1280 - 320)) * (18 - 14));
     line-height: calc(17px + ((100vw - 320px) / (1280 - 320)) * (22 - 17));
-    /* margin-top: calc(45px + ((100vw - 320px) / (1280 - 320)) * (15 - 45)); */
+  }
+  .form__submit-button_theme_white {
+    height: calc(46px + ((100vw - 320px) / (1280 - 320)) * (50.15 - 46));
+    width: calc(238px + ((100vw - 320px) / (1280 - 320)) * (358 - 238));
+    font-size: calc(14px + ((100vw - 320px) / (1280 - 320)) * (18 - 14));
+    line-height: calc(17px + ((100vw - 320px) / (1280 - 320)) * (22 - 17));
+    margin-top:  calc(173px + ((100vw - 320px) / (1280 - 320)) * (216 - 173));
   }
 }

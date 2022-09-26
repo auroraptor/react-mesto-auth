@@ -4,3 +4,10 @@
   flex-direction: column;
 }
 
+.form_theme_white {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
