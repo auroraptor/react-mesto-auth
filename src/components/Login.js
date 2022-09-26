@@ -6,7 +6,7 @@ function Login(props) {
   const initValues = {'email': '', 'password': ''};
   const [state, setState] = useState(initValues);
 
-  const handleChange = (evt) => {
+  const handleChange = (evt) => { // TODO DRY Register.js
     const {name, value} = evt.target;
     setState(_ => ({
       ..._,
@@ -17,8 +17,7 @@ function Login(props) {
  const handleSubmit = (evt) => {
     evt.preventDefault();
     const {email, password} = state;
-
-    props.onLogin(email, password)
+    props.onLogin(email, password);
   }
 
   return (

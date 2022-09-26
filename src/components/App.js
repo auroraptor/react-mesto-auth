@@ -63,9 +63,6 @@ function App() {
 
     api.getContent(jwt)
     .then(res => {
-      console.log(res);
-      console.log(res.data);
-
       const userData = {
         '_id': res.data._id,
         'email': res.data.email
@@ -120,7 +117,7 @@ function App() {
 
   useEffect(() => {
     if (!isInfoTooltipOpen && success) navigate('/sign-in');
-  }, [isInfoTooltipOpen, success]);
+  }, [isInfoTooltipOpen, success, navigate]);
 
   const handleUpdateUser = (data) => {
     api.editUserInfo(data)

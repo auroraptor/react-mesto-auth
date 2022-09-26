@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Header from "./Header";
 import Login from "./Login";
 import Input from "./Input";
-import api from "../utils/api";
 import InfoTooltip from "./InfoTooltip";
 
 function Register(props) {
   const [state, setState] = useState({'email': '', 'password': ''});
-  // const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
-  // const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
 
-  const handleChange = (evt) => {
+  const handleChange = (evt) => { // TODO DRY Login.js
     const {name, value} = evt.target;
     setState(_ => ({
       ..._,
@@ -23,21 +19,8 @@ function Register(props) {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     const {email, password} = state;
-
     props.onRegister(email, password);
-
-    // api.register(password, email)
-    // .then(() => setSuccess(true))
-    // .catch((err) => {
-    //   setSuccess(false);
-    //   console.log('error', err);
-    // })
-    // .finally(() => setInfoTooltipOpen(true));
   }
-
-  // useEffect(() => {
-  //   if (!props?.isOpen && props?.success) navigate('/sign-in');
-  // }, [props?.isOpen, props?.success]);
 
   return (
     <>
