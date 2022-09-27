@@ -91,6 +91,8 @@ function App() {
     .finally(() => setInfoTooltipOpen(true));
   }
 
+  const handleLogOut = () => localStorage.removeItem('jwt');
+
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
@@ -112,7 +114,7 @@ function App() {
   useEffect(() => {
     api.getUserInfo()
     .then((res) => setUser(res) )
-    .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING WENT WRONG
+    .catch((err) => console.log(err))
   }, []);
 
   useEffect(() => {
@@ -152,7 +154,7 @@ function App() {
       <Route element={<ProtectedRoute/>}>
           <Route path="/*" element= {
             <CurrentUserContext.Provider value={currentUser}>
-              <Header link="/sign-in" text="Выйти" email={content?.email}></Header>
+              <Header link="/sign-in" text="Выйти" email={content?.email} onLogOut={handleLogOut}></Header>
 
               <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
