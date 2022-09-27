@@ -23,9 +23,9 @@ function App() {
   const [ selectedCard, setSelectedCard ] = useState(null);
   const [ currentUser, setUser ] = useState({name: '', about: '', avatar: ''});
   const [ cards, setCards ] = useState([]);
-  const [ content, setContent] = useState({})
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [ email, setEmail] = useState('')
+  const [ isInfoTooltipOpen, setInfoTooltipOpen ] = useState(false);
+  const [ success, setSuccess ] = useState(false);
   const navigate = useNavigate();
 
   const handleCardClick = (card) => {
@@ -58,16 +58,10 @@ function App() {
 
   useEffect(() => {
     if (!localStorage.getItem('jwt')) return;
-
     const jwt = localStorage.getItem('jwt');
-
     api.getContent(jwt)
     .then(res => {
-      const userData = {
-        '_id': res.data._id,
-        'email': res.data.email
-      }
-      setContent(userData)
+      setEmail(res.data.email)
     })
     .catch(err => console.log(err));
   }, []);
@@ -154,7 +148,7 @@ function App() {
       <Route element={<ProtectedRoute/>}>
           <Route path="/*" element= {
             <CurrentUserContext.Provider value={currentUser}>
-              <Header link="/sign-in" text="Выйти" email={content?.email} onLogOut={handleLogOut}></Header>
+              <Header link="/sign-in" text="Выйти" email={email} onLogOut={handleLogOut}></Header>
 
               <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
