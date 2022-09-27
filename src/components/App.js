@@ -72,7 +72,7 @@ function App() {
     .catch(err => console.log(err));
   }, []);
 
-  function handleLogin(email, password) {
+  const handleLogin = (email, password) => {
     api.login(password, email)
     .then((data) => {
       localStorage.setItem('jwt', data.token);
@@ -81,7 +81,7 @@ function App() {
     .catch(err => console.log(err))
   }
 
-  function handleRegister(email, password) {
+  const handleRegister = (email, password) => {
     api.register(password, email)
     .then(() => setSuccess(true))
     .catch((err) => {
@@ -91,7 +91,7 @@ function App() {
     .finally(() => setInfoTooltipOpen(true));
   }
 
-  function handleCardLike(card) {
+  const handleCardLike = (card) => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     api.like(card, isLiked)
@@ -101,7 +101,7 @@ function App() {
     .catch(err => console.log(err));
   }
 
-  function handleCardDelete(card) {
+  const handleCardDelete = (card) => {
     api.deleteCard(card)
     .then(() => {
       setCards((cards) => cards.filter((c) => c._id !== card._id ))
