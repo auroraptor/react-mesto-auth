@@ -3,21 +3,14 @@ import Header from "./Header"
 import Input from "./Input"
 
 function Login(props) {
-  const initValues = {'email': '', 'password': ''};
-  const [state, setState] = useState(initValues);
-
-  const handleChange = (evt) => { // TODO DRY Register.js
-    const {name, value} = evt.target;
-    setState(_ => ({
-      ..._,
-      [name]: value
-    }));
-  }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
  const handleSubmit = (evt) => {
     evt.preventDefault();
-    const {email, password} = state;
     props.onLogin(email, password);
+    setEmail('');
+    setPassword('');
   }
 
   return (
@@ -29,9 +22,9 @@ function Login(props) {
     onSubmit={handleSubmit}>
       <label className="heading__register">Вход</label>
         <Input type="email" id="email" name="email"
-            placeholder="Email"  minLength="false" maxLength="false" value={state.value} onChange={handleChange}/>
+            placeholder="Email"  minLength="false" maxLength="false" value={email} onChange={e => setEmail(e.target.value)}/>
         <Input type="password" id="password" name="password"
-            placeholder="Пароль" minLength="8" maxLength="40" value={state.value} onChange={handleChange}/>
+            placeholder="Пароль" minLength="8" maxLength="40" value={password} onChange={e => setPassword(e.target.value)}/>
         <button type="submit" className="form__submit-button_theme_white" value="disable">Войти</button>
     </form>
     </div>)

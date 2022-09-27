@@ -13,7 +13,7 @@ function Register(props) {
     evt.preventDefault();
     props.onRegister(email, password);
     setEmail('');
-    setPassword('')
+    setPassword('');
   }
 
   return (
