@@ -6,20 +6,14 @@ import Input from "./Input";
 import InfoTooltip from "./InfoTooltip";
 
 function Register(props) {
-  const [state, setState] = useState({'email': '', 'password': ''});
-
-  const handleChange = (evt) => { // TODO DRY Login.js
-    const {name, value} = evt.target;
-    setState(_ => ({
-      ..._,
-      [name]: value
-    }));
-  }
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const {email, password} = state;
     props.onRegister(email, password);
+    setEmail('');
+    setPassword('');
   }
 
   return (
@@ -31,9 +25,9 @@ function Register(props) {
     onSubmit={handleSubmit}>
       <label className="heading__register">Регистрация</label>
           <Input type="email" id="email" name="email"
-            placeholder="Email"  minLength="false" maxLength="false" value={state.value} onChange={handleChange}/>
+            placeholder="Email"  minLength="false" maxLength="false" value={email} onChange={e => setEmail(e.target.value)}/>
           <Input type="password" id="password" name="password"
-            placeholder="Пароль" minLength="8" maxLength="40" value={state.value} onChange={handleChange}/>
+            placeholder="Пароль" minLength="8" maxLength="40" value={password} onChange={e => setPassword(e.target.value)}/>
         <button type="submit" className="form__submit-button_theme_white">Зарегестрироваться</button>
     </form>
     <div className="help-text">
