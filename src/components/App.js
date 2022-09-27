@@ -140,7 +140,7 @@ function App() {
     .finally(() => closeAllPopups())
   }
 
-  function closeAllPopups() {
+  const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setAddPlacePopupOpen(false);
