@@ -76,8 +76,8 @@ function App() {
     api.login(password, email)
     .then((data) => {
       localStorage.setItem('jwt', data.token);
+      navigate('/');
     })
-    .then(() => navigate('/'))
     .catch(err => console.log(err))
   }
 
