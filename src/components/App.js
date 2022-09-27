@@ -23,9 +23,9 @@ function App() {
   const [ selectedCard, setSelectedCard ] = useState(null);
   const [ currentUser, setUser ] = useState({name: '', about: '', avatar: ''});
   const [ cards, setCards ] = useState([]);
-  const [ content, setContent] = useState({})
-  const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [ email, setEmail] = useState('')
+  const [ isInfoTooltipOpen, setInfoTooltipOpen ] = useState(false);
+  const [ success, setSuccess ] = useState(false);
   const navigate = useNavigate();
 
   const handleCardClick = (card) => {
@@ -58,30 +58,24 @@ function App() {
 
   useEffect(() => {
     if (!localStorage.getItem('jwt')) return;
-
     const jwt = localStorage.getItem('jwt');
-
     api.getContent(jwt)
     .then(res => {
-      const userData = {
-        '_id': res.data._id,
-        'email': res.data.email
-      }
-      setContent(userData)
+      setEmail(res.data.email)
     })
     .catch(err => console.log(err));
   }, []);
 
-  function handleLogin(email, password) {
+  const handleLogin = (email, password) => {
     api.login(password, email)
     .then((data) => {
       localStorage.setItem('jwt', data.token);
+      navigate('/');
     })
-    .then(() => navigate('/'))
     .catch(err => console.log(err))
   }
 
-  function handleRegister(email, password) {
+  const handleRegister = (email, password) => {
     api.register(password, email)
     .then(() => setSuccess(true))
     .catch((err) => {
@@ -91,7 +85,9 @@ function App() {
     .finally(() => setInfoTooltipOpen(true));
   }
 
-  function handleCardLike(card) {
+  const handleLogOut = () => localStorage.removeItem('jwt');
+
+  const handleCardLike = (card) => {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     api.like(card, isLiked)
@@ -101,7 +97,7 @@ function App() {
     .catch(err => console.log(err));
   }
 
-  function handleCardDelete(card) {
+  const handleCardDelete = (card) => {
     api.deleteCard(card)
     .then(() => {
       setCards((cards) => cards.filter((c) => c._id !== card._id ))
@@ -112,7 +108,7 @@ function App() {
   useEffect(() => {
     api.getUserInfo()
     .then((res) => setUser(res) )
-    .catch((err) => console.log(err)) // TODO показать что-то вроде попапа SOMETHING WENT WRONG
+    .catch((err) => console.log(err))
   }, []);
 
   useEffect(() => {
@@ -140,7 +136,7 @@ function App() {
     .finally(() => closeAllPopups())
   }
 
-  function closeAllPopups() {
+  const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setAddPlacePopupOpen(false);
@@ -152,7 +148,7 @@ function App() {
       <Route element={<ProtectedRoute/>}>
           <Route path="/*" element= {
             <CurrentUserContext.Provider value={currentUser}>
-              <Header link="/sign-in" text="Выйти" email={content?.email}></Header>
+              <Header link="/sign-in" text="Выйти" email={email} onLogOut={handleLogOut}></Header>
 
               <Main onEditAvatar={handleEditAvatarClick} onAddPlace={handleAddPlaceClick} onEditProfile={handleEditProfileClick} onCardClick={handleCardClick} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
 
