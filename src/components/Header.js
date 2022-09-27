@@ -1,5 +1,4 @@
 import {memo, useState} from 'react';
-import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import useWindowSize from '../hooks/useWindowSize';
 import '../index.css';
