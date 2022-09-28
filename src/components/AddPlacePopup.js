@@ -4,26 +4,20 @@ import Input from "./Input";
 
 function AddPlacePopup(props) {
   const { onAddPlace } = props;
-  const [name, setName] = useState("");
-  const [link, setLink] = useState("");
+  const [formValues, setFormValues] = useState({name: '', link: ''});
 
-  function handleNameChange(evt) {
-    setName(evt.target.value);
-  }
-
-  function handleLinkChange(evt) {
-    setLink(evt.target.value);
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormValues(_ => ({..._, [name]: value}));
   }
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
-    onAddPlace({ name, link });
+    onAddPlace(formValues);
   }
 
   useEffect(() => {
-    setName("");
-    setLink("");
+    setFormValues({name: '', link: ''});
   }, [props.isOpen]);
 
   return (
@@ -42,8 +36,8 @@ function AddPlacePopup(props) {
           placeholder="Название"
           minLength="2"
           maxLength="30"
-          value={name}
-          onChange={handleNameChange}
+          value={formValues?.name}
+          onChange={handleChange}
         />
         <Input
           type="url"
@@ -52,8 +46,8 @@ function AddPlacePopup(props) {
           placeholder="Ссылка на картинку"
           minLength="false"
           maxLength="false"
-          value={link}
-          onChange={handleLinkChange}
+          value={formValues?.link}
+          onChange={handleChange}
         />
       </>
     </PopupWithForm>
