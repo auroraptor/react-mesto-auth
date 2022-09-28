@@ -4,12 +4,12 @@ import Input from "./Input";
 
 function AddPlacePopup(props) {
   const { onAddPlace } = props;
-  const [formValues, setFormValues] = useState({name: '', link: ''});
+  const [formValues, setFormValues] = useState({ name: "", link: "" });
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormValues(_ => ({..._, [name]: value}));
-  }
+    const { name, value } = e.target;
+    setFormValues((_) => ({ ..._, [name]: value }));
+  };
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -17,7 +17,7 @@ function AddPlacePopup(props) {
   }
 
   useEffect(() => {
-    setFormValues({name: '', link: ''});
+    setFormValues({ name: "", link: "" });
   }, [props.isOpen]);
 
   return (
