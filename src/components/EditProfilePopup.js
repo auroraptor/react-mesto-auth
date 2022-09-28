@@ -5,20 +5,20 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup(props) {
   const currentUser = useContext(CurrentUserContext);
-  const [ name, setName ] = useState('');
-  const [ description, setDescription] = useState('');
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser, props.isOpen])
+  }, [currentUser, props.isOpen]);
 
   function handleNameChange(evt) {
-    setName(evt.target.value)
+    setName(evt.target.value);
   }
 
   function handleDescriptionChange(evt) {
-    setDescription(evt.target.value)
+    setDescription(evt.target.value);
   }
 
   function handleSubmit(evt) {
@@ -31,11 +31,35 @@ function EditProfilePopup(props) {
   }
 
   return (
-    <PopupWithForm name="edit-profile" title="Редактировать профиль" onSubmit={handleSubmit} {...props} buttonTextContent="Сохранить">
-     <Input type="text" id="name" name="name" placeholder="Имя" minLength="2" maxLength="40" value={name} onChange={handleNameChange}></Input>
-     <Input type="text" id="about" name="about" placeholder="О себе" minLength="2" maxLength="200" value={description} onChange={handleDescriptionChange}></Input>
-  </PopupWithForm>
-  )
+    <PopupWithForm
+      name="edit-profile"
+      title="Редактировать профиль"
+      onSubmit={handleSubmit}
+      {...props}
+      buttonTextContent="Сохранить"
+    >
+      <Input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Имя"
+        minLength="2"
+        maxLength="40"
+        value={name}
+        onChange={handleNameChange}
+      ></Input>
+      <Input
+        type="text"
+        id="about"
+        name="about"
+        placeholder="О себе"
+        minLength="2"
+        maxLength="200"
+        value={description}
+        onChange={handleDescriptionChange}
+      ></Input>
+    </PopupWithForm>
+  );
 }
 
 export default EditProfilePopup;
