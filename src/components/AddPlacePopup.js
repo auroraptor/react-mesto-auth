@@ -4,15 +4,15 @@ import Input from "./Input";
 
 function AddPlacePopup(props) {
   const { onAddPlace } = props;
-  const [ name, setName ] = useState('');
-  const [ link, setLink] = useState('');
+  const [name, setName] = useState("");
+  const [link, setLink] = useState("");
 
   function handleNameChange(evt) {
     setName(evt.target.value);
   }
 
   function handleLinkChange(evt) {
-    setLink(evt.target.value)
+    setLink(evt.target.value);
   }
 
   function handleSubmit(evt) {
@@ -22,18 +22,42 @@ function AddPlacePopup(props) {
   }
 
   useEffect(() => {
-    setName('');
-    setLink('');
-  }, [props.isOpen])
+    setName("");
+    setLink("");
+  }, [props.isOpen]);
 
   return (
-    <PopupWithForm name="new-item" title="Новое место" buttonTextContent="Сохранить" {...props} onSubmit={handleSubmit}>
-    <>
-      <Input type="text" id="place" name="name" placeholder="Название"  minLength="2" maxLength="30" value={name} onChange={handleNameChange}/>
-      <Input type="url" id="link" name="link" placeholder="Ссылка на картинку" minLength="false" maxLength="false" value={link} onChange={handleLinkChange}/>
-    </>
+    <PopupWithForm
+      name="new-item"
+      title="Новое место"
+      buttonTextContent="Сохранить"
+      {...props}
+      onSubmit={handleSubmit}
+    >
+      <>
+        <Input
+          type="text"
+          id="place"
+          name="name"
+          placeholder="Название"
+          minLength="2"
+          maxLength="30"
+          value={name}
+          onChange={handleNameChange}
+        />
+        <Input
+          type="url"
+          id="link"
+          name="link"
+          placeholder="Ссылка на картинку"
+          minLength="false"
+          maxLength="false"
+          value={link}
+          onChange={handleLinkChange}
+        />
+      </>
     </PopupWithForm>
-  )
+  );
 }
 
 export default AddPlacePopup;
