@@ -4,7 +4,7 @@ import "../index.css";
 function ImagePopup({ card, onClose }) {
   return (
     <div
-      className={`popup popup_with_image image-zoomed-popup ${
+      className={`popup popup_with-image image-zoomed-popup ${
         card && `popup_opened`
       }`}
     >
