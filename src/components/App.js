@@ -123,10 +123,8 @@ function App() {
   };
 
   useEffect(() => {
-    if (!isInfoTooltipOpen && success) {
-      if (loggedIn === false)
-      navigate("/sign-in");}
-  }, [isInfoTooltipOpen, success, loggedIn, navigate]);
+    if (!isInfoTooltipOpen && success) navigate("/sign-in");
+  }, [isInfoTooltipOpen, success, navigate]);
 
   const handleUpdateUser = (data) => {
     api
@@ -163,7 +161,7 @@ function App() {
     <Routes>
       <Route element={<ProtectedRoute />}>
         <Route
-          path="/*"
+          path="/"
           element={
             <CurrentUserContext.Provider value={currentUser}>
               <Header
