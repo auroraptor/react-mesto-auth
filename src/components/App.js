@@ -123,8 +123,10 @@ function App() {
   };
 
   useEffect(() => {
-    if (!isInfoTooltipOpen && success) navigate("/sign-in");
-  }, [isInfoTooltipOpen, success, navigate]);
+    if (!isInfoTooltipOpen && success) {
+      if (loggedIn === false)
+      navigate("/sign-in");}
+  }, [isInfoTooltipOpen, success, loggedIn, navigate]);
 
   const handleUpdateUser = (data) => {
     api
