@@ -25,7 +25,7 @@ function App() {
   const [email, setEmail] = useState("");
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const navigate = useNavigate();
 
   const handleCardClick = (card) => {
@@ -42,7 +42,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (!isLoggedIn) return;
+    if (!loggedIn) return;
     api
       .getCardList()
       .then((data) => {
@@ -63,16 +63,16 @@ function App() {
       .getUserInfo()
       .then((res) => setUser(res))
       .catch((err) => console.log(err));
-  }, [isLoggedIn]);
+  }, [loggedIn]);
 
   useEffect(() => {
-    if (!localStorage.getItem("jwt")) return;
     const jwt = localStorage.getItem("jwt");
+    if (!jwt) return;
     api
       .getContent(jwt)
       .then((res) => {
         setEmail(res.data.email);
-        setIsLoggedIn(true);
+        setLoggedIn(true);
       })
       .catch((err) => console.log(err));
   }, []);
