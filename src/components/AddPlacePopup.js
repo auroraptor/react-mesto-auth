@@ -8,7 +8,7 @@ function AddPlacePopup(props) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues((_) => ({ ..._, [name]: value }));
+    setFormValues((prevValue) => ({ ...prevValue, [name]: value }));
   };
 
   function handleSubmit(evt) {

@@ -55,5 +55,6 @@
 @import url(./blocks/popup/__error/_visible/popup__error_visible.css);
 @import url(./blocks/help-text/help-text.css);
 @import url(./blocks/info/info.css);
+@import url(./blocks/not-found/not-found.css);
 
 
