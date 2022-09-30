@@ -18,7 +18,7 @@ function Register(props) {
 
   return (
     <>
-      <Header link="/sign-in" text="Войти" elem={<Login />} />
+      <Header link="/react-mesto-auth/sign-in" text="Войти" elem={<Login />} />
       <form
         className={`form_theme_white register-form`}
         name="register"
@@ -51,7 +51,7 @@ function Register(props) {
       </form>
       <div className="help-text">
         <span>Уже зарегестрированы? </span>
-        <Link className="help-text__link" to="/sign-in">
+        <Link className="help-text__link" to="/react-mesto-auth/sign-in">
           Войти
         </Link>
       </div>
