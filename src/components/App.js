@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect} from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
@@ -20,7 +20,7 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-  const [currentUser, setUser] = useState({ name: "", about: "", avatar: "" });
+  const [currentUser, setCurrentUser] = useState({ name: "", about: "", avatar: "" });
   const [cards, setCards] = useState([]);
   const [email, setEmail] = useState("");
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
@@ -43,26 +43,13 @@ function App() {
 
   useEffect(() => {
     if (!loggedIn) return;
-    api
-      .getCardList()
-      .then((data) => {
-        return data.map((item) => {
-          return {
-            name: item.name,
-            link: item.link,
-            likes: item.likes,
-            _id: item._id,
-            owner: item.owner,
-          };
-        });
-      })
-      .then((cards) => setCards(cards))
-      .catch((err) => console.log(err));
 
-    api
-      .getUserInfo()
-      .then((res) => setUser(res))
-      .catch((err) => console.log(err));
+    Promise.all([api.getUserInfo(), api.getCardList()])
+    .then(([user, cards]) => {
+      setCurrentUser(user);
+      setCards(cards);
+    })
+    .catch(e => console.log(e))
   }, [loggedIn]);
 
   useEffect(() => {
@@ -82,6 +69,8 @@ function App() {
       .login(password, email)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
+        setEmail(email);
+        setLoggedIn(true);
         navigate("/react-mesto-auth/");
       })
       .catch((err) => console.log(err));
@@ -98,7 +87,11 @@ function App() {
       .finally(() => setInfoTooltipOpen(true));
   };
 
-  const handleLogOut = () => localStorage.removeItem("jwt");
+  const handleLogOut = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    setCurrentUser({ name: "", about: "", avatar: "" });
+  };
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
@@ -124,12 +117,12 @@ function App() {
 
   useEffect(() => {
     if (!isInfoTooltipOpen && success) navigate("/react-mesto-auth/sign-in");
-  }, [isInfoTooltipOpen, success, navigate]);
+  }, [isInfoTooltipOpen]);
 
   const handleUpdateUser = (data) => {
     api
       .editUserInfo(data)
-      .then((res) => setUser(res))
+      .then((res) => setCurrentUser(res))
       .catch((err) => console.log(err))
       .finally(() => closeAllPopups());
   };
@@ -137,7 +130,7 @@ function App() {
   const handleUpdateAvatar = (link) => {
     api
       .editUserAvatar(link)
-      .then((res) => setUser(res))
+      .then((res) => setCurrentUser(res))
       .catch((err) => console.log(err))
       .finally(() => closeAllPopups());
   };
@@ -230,6 +223,7 @@ function App() {
       />
       <Route element={<Login onLogin={handleLogin} />} path="/react-mesto-auth/sign-in" />
       <Route element={<NotFound />} path="/*" />
+      {/* TODO */}
     </Routes>
   );
 }
