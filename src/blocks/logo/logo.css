@@ -13,5 +13,7 @@
   .logo {
     width: calc(103.74px + ((100vw - 320px) / (1280 - 320)) * (142 - 103.74));
     height: calc(24.4px + ((100vw - 320px) / (1280 - 320)) * (33 - 24.4));
+  background-image: url(../../images/logo_color_white.svg);
+
   }
 }
