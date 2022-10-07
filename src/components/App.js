@@ -19,6 +19,7 @@ function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
+  const [isConfirmPopupOpen, setConnfirmPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({ name: "", about: "", avatar: "" });
   const [cards, setCards] = useState([]);
@@ -197,6 +198,7 @@ function App() {
               <PopupWithForm
                 name="confirm"
                 title="Вы уверены?"
+                isOpen={isConfirmPopupOpen}
                 onClose={closeAllPopups}
                 buttonTextContent="Да"
               />
