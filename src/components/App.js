@@ -14,6 +14,7 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/api";
+import ConfirmPopup from "./ConfirmPopup";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -107,13 +108,17 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  // const handleCardDelete = (card) => {
+  //   api
+  //     .deleteCard(card)
+  //     .then(() => {
+  //       setCards((cards) => cards.filter((c) => c._id !== card._id));
+  //     })
+  //     .catch((err) => console.log(err))
+  // };
+
   const handleCardDelete = (card) => {
-    api
-      .deleteCard(card)
-      .then(() => {
-        setCards((cards) => cards.filter((c) => c._id !== card._id));
-      })
-      .catch((err) => console.log(err));
+    setConnfirmPopupOpen(true);
   };
 
   useEffect(() => {
@@ -195,7 +200,7 @@ function App() {
                 onAddPlace={handleAddPlaceSubmit}
               />
 
-              <PopupWithForm
+              <ConfirmPopup
                 name="confirm"
                 title="Вы уверены?"
                 isOpen={isConfirmPopupOpen}
