@@ -22,6 +22,7 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setConnfirmPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [removeCard, setRemoveCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({ name: "", about: "", avatar: "" });
   const [cards, setCards] = useState([]);
   const [email, setEmail] = useState("");
@@ -108,17 +109,19 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  // const handleCardDelete = (card) => {
-  //   api
-  //     .deleteCard(card)
-  //     .then(() => {
-  //       setCards((cards) => cards.filter((c) => c._id !== card._id));
-  //     })
-  //     .catch((err) => console.log(err))
-  // };
-
   const handleCardDelete = (card) => {
+    api
+      .deleteCard(card)
+      .then(() => {
+        setCards((cards) => cards.filter((c) => c._id !== card._id));
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setConnfirmPopupOpen(false))
+  };
+
+  const handleConfirmationPopup = (card) => {
     setConnfirmPopupOpen(true);
+    setRemoveCard(card); //const card = card; // ?
   };
 
   useEffect(() => {
@@ -154,6 +157,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setAddPlacePopupOpen(false);
     setSelectedCard(null);
+    setConnfirmPopupOpen(false);
   };
 
   return (
@@ -177,7 +181,7 @@ function App() {
                 onCardClick={handleCardClick}
                 cards={cards}
                 onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
+                onCardDelete={handleConfirmationPopup}
               />
 
               <Footer />
@@ -203,7 +207,9 @@ function App() {
               <ConfirmPopup
                 name="confirm"
                 title="Вы уверены?"
+                card={removeCard}
                 isOpen={isConfirmPopupOpen}
+                onCardDelete={handleCardDelete}
                 onClose={closeAllPopups}
                 buttonTextContent="Да"
               />
