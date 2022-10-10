@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import PopupWithForm from "./PopupWithForm";
 
 const ConfirmPopup = (props) => {
