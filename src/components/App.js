@@ -21,6 +21,7 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfirmPopupOpen, setConnfirmPopupOpen] = useState(false);
+  const [isImagePopupOpen, setImagePopupOpen] = useState(false) // про попап с картинкой что-то чтобы избегать крестика fix animation popupclosed
   const [selectedCard, setSelectedCard] = useState(null);
   const [removeCard, setRemoveCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({ name: "", about: "", avatar: "" });
@@ -32,6 +33,7 @@ function App() {
   const navigate = useNavigate();
 
   const handleCardClick = (card) => {
+    setImagePopupOpen(true);
     setSelectedCard(card);
   };
   const handleEditAvatarClick = () => {
@@ -156,8 +158,9 @@ function App() {
     setEditProfilePopupOpen(false);
     setEditAvatarPopupOpen(false);
     setAddPlacePopupOpen(false);
-    setSelectedCard(null);
+    // setSelectedCard(null);
     setConnfirmPopupOpen(false);
+    setImagePopupOpen(false);
   };
 
   return (
@@ -216,7 +219,8 @@ function App() {
 
               <ImagePopup
                 card={selectedCard}
-                isOpened={handleCardClick}
+                // isOpened={handleCardClick}
+                isOpened={isImagePopupOpen}
                 onClose={closeAllPopups}
               />
             </CurrentUserContext.Provider>

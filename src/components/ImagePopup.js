@@ -1,11 +1,11 @@
 import React from "react";
 import "../index.css";
 
-function ImagePopup({ card, onClose }) {
+function ImagePopup({ card, onClose, isOpened }) {
   return (
     <div
       className={`popup popup_with-image image-zoomed-popup ${
-        card && `popup_opened`
+        isOpened ? `popup_opened` : ''
       }`}
     >
       <div className="popup__yet-another-container">
