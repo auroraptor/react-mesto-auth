@@ -213,12 +213,10 @@ function App() {
                 isOpen={isConfirmPopupOpen}
                 onCardDelete={handleCardDelete}
                 onClose={closeAllPopups}
-                buttonTextContent="Да"
               />
 
               <ImagePopup
                 card={selectedCard}
-                // isOpened={handleCardClick}
                 isOpened={isImagePopupOpen}
                 onClose={closeAllPopups}
               />

@@ -5,6 +5,7 @@ import Input from "./Input";
 function AddPlacePopup(props) {
   const { onAddPlace } = props;
   const [formValues, setFormValues] = useState({ name: "", link: "" });
+  const [ buttonText, setButtonText ] = useState('Сохранить');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -13,18 +14,20 @@ function AddPlacePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    setButtonText('Сохранение...');
     onAddPlace(formValues);
   }
 
   useEffect(() => {
     setFormValues({ name: "", link: "" });
+    setButtonText('Сохранить');
   }, [props.isOpen]);
 
   return (
     <PopupWithForm
       name="new-item"
       title="Новое место"
-      buttonTextContent="Сохранить"
+      buttonTextContent={buttonText}
       {...props}
       onSubmit={handleSubmit}
     >

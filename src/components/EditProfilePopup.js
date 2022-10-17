@@ -7,10 +7,12 @@ function EditProfilePopup(props) {
   const currentUser = useContext(CurrentUserContext);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [ buttonText, setButtonText ] = useState('Сохранить');
 
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
+    setButtonText('Сохранить');
   }, [currentUser, props.isOpen]);
 
   function handleNameChange(evt) {
@@ -23,7 +25,7 @@ function EditProfilePopup(props) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-
+    setButtonText('Сохранение...');
     props.onUpdateUser({
       name,
       about: description,
@@ -36,7 +38,7 @@ function EditProfilePopup(props) {
       title="Редактировать профиль"
       onSubmit={handleSubmit}
       {...props}
-      buttonTextContent="Сохранить"
+      buttonTextContent={buttonText}
     >
       <Input
         type="text"
