@@ -10,7 +10,7 @@ const ConfirmPopup = (props) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setButtonText('Удаление...');
-    onCardDelete(card); // delete()
+    onCardDelete(card);
   }
   return (
     <PopupWithForm {...props} onSubmit={handleSubmit} buttonTextContent={buttonText}/>
