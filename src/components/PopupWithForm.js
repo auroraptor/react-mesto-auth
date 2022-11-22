@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingSpinner from "./Spinner/Spinner";
 import "../index.css";
 
 function PopupWithForm(props) {
@@ -10,10 +11,12 @@ function PopupWithForm(props) {
     children,
     buttonTextContent,
     onSubmit,
+    isLoading
   } = props;
 
   return (
     <div className={`popup ${name}-popup ${isOpen && `popup_opened`}`}>
+      <LoadingSpinner className={`spinner-container ${isLoading && `visible`}`} />
       <div className="popup__container">
         <button
           type="button"

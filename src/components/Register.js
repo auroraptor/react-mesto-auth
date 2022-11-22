@@ -4,6 +4,7 @@ import Header from "./Header";
 import Login from "./Login";
 import Input from "./Input";
 import InfoTooltip from "./InfoTooltip";
+import LoadingSpinner from "./Spinner/Spinner";
 
 function Register(props) {
   const [email, setEmail] = useState("");
@@ -19,6 +20,7 @@ function Register(props) {
   return (
     <>
       <Header link="/react-mesto-auth/sign-in" text="Войти" elem={<Login />} />
+      <LoadingSpinner className={`spinner-container ${props.isLoading && `visible`}`} />
       <form
         className={`form_theme_white register-form`}
         name="register"

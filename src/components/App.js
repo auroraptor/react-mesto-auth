@@ -30,6 +30,7 @@ function App() {
   const [isInfoTooltipOpen, setInfoTooltipOpen] = useState(false);
   const [success, setSuccess] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleCardClick = (card) => {
@@ -70,6 +71,8 @@ function App() {
   }, []);
 
   const handleLogin = (email, password) => {
+    setIsLoading(true);
+
     api
       .login(password, email)
       .then((data) => {
@@ -78,10 +81,12 @@ function App() {
         setLoggedIn(true);
         navigate("/react-mesto-auth/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   };
 
   const handleRegister = (email, password) => {
+    setIsLoading(true);
     api
       .register(password, email)
       .then(() => setSuccess(true))
@@ -89,7 +94,10 @@ function App() {
         setSuccess(false);
         console.log("error", err);
       })
-      .finally(() => setInfoTooltipOpen(true));
+      .finally(() => {
+        setInfoTooltipOpen(true);
+        setIsLoading(false);
+      });
   };
 
   const handleLogOut = () => {
@@ -112,13 +120,17 @@ function App() {
   };
 
   const handleCardDelete = (card) => {
+    setIsLoading(true);
     api
       .deleteCard(card)
       .then(() => {
         setCards((cards) => cards.filter((c) => c._id !== card._id));
       })
       .catch((err) => console.log(err))
-      .finally(() => setConnfirmPopupOpen(false))
+      .finally(() => {
+        closeAllPopups();
+        setIsLoading(false);
+      });
   };
 
   const handleConfirmationPopup = (card) => {
@@ -131,27 +143,42 @@ function App() {
   }, [isInfoTooltipOpen]);
 
   const handleUpdateUser = (data) => {
+    setIsLoading(true);
+
     api
       .editUserInfo(data)
       .then((res) => setCurrentUser(res))
       .catch((err) => console.log(err))
-      .finally(() => closeAllPopups());
+      .finally(() => {
+        closeAllPopups();
+        setIsLoading(false);
+      });
   };
 
   const handleUpdateAvatar = (link) => {
+    setIsLoading(true);
+
     api
       .editUserAvatar(link)
       .then((res) => setCurrentUser(res))
       .catch((err) => console.log(err))
-      .finally(() => closeAllPopups());
+      .finally(() => {
+        closeAllPopups();
+        setIsLoading(false);
+      });
   };
 
   const handleAddPlaceSubmit = (data) => {
+    setIsLoading(true);
+
     api
       .postNewCard(data)
       .then((newCard) => setCards([newCard, ...cards]))
       .catch((err) => console.log(err))
-      .finally(() => closeAllPopups());
+      .finally(() => {
+        closeAllPopups();
+        setIsLoading(false);
+      });
   };
 
   const closeAllPopups = () => {
@@ -193,18 +220,22 @@ function App() {
                 isOpen={isEditProfilePopupOpen}
                 onClose={closeAllPopups}
                 onUpdateUser={handleUpdateUser}
+                isLoading={isLoading}
               />
 
               <EditAvatarPopup
                 isOpen={isEditAvatarPopupOpen}
                 onClose={closeAllPopups}
                 onUpdateAvatar={handleUpdateAvatar}
+                isLoading={isLoading}
               />
 
               <AddPlacePopup
                 isOpen={isAddPlacePopupOpen}
                 onClose={closeAllPopups}
                 onAddPlace={handleAddPlaceSubmit}
+                isLoading={isLoading}
+
               />
 
               <ConfirmPopup
@@ -214,6 +245,8 @@ function App() {
                 isOpen={isConfirmPopupOpen}
                 onCardDelete={handleCardDelete}
                 onClose={closeAllPopups}
+                isLoading={isLoading}
+
               />
 
               <ImagePopup
@@ -232,11 +265,13 @@ function App() {
             isOpen={isInfoTooltipOpen}
             onRegister={handleRegister}
             closeInfoTooltip={setInfoTooltipOpen}
+            disabled={isLoading}
+            isLoading={isLoading}
           />
         }
         path="/react-mesto-auth/sign-up"
       />
-      <Route element={<Login onLogin={handleLogin} />} path="/react-mesto-auth/sign-in" />
+      <Route element={<Login onLogin={handleLogin} isLoading={isLoading}/>} path="/react-mesto-auth/sign-in" />
       <Route element={<NotFound />} path="/*" />
       {/* TODO */}
     </Routes>
